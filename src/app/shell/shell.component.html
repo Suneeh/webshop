@@ -1,0 +1,43 @@
+<mat-sidenav-container autosize class="sidenavcontainer">
+  <mat-sidenav #sidenav mode="side" opened class="sidenav">
+    <mat-nav-list class="nav-list" dense>
+      <a [routerLink]="['/']" class="nav-link-item" mat-list-item>
+        <mat-icon matListItemIcon>home</mat-icon>
+        <span matListItemTitle>Home</span>
+      </a>
+
+      <a [routerLink]="['/']" class="nav-link-item" mat-list-item>
+        <mat-icon matListItemIcon>home</mat-icon>
+        <span matListItemTitle>i am a very long category</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div id="header">
+      <mat-toolbar color="accent">
+        <span>
+          Follow this project on <a href="https://dev.to/suneeh" rel="noopener noreferrer" target="_blank">dev.to</a> and on
+          <a href="https://github.com/Suneeh/webshop" rel="noopener noreferrer" target="_blank">github</a>.
+        </span>
+      </mat-toolbar>
+    </div>
+    <div id="main">
+      <div
+        >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum, ipsa distinctio architecto aperiam assumenda officia repudiandae
+        numquam similique accusamus eligendi beatae iusto illo eum quaerat hic minima vero officiis velit.</div
+      >
+      <div
+        >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum, ipsa distinctio architecto aperiam assumenda officia repudiandae
+        numquam similique accusamus eligendi beatae iusto illo eum quaerat hic minima vero officiis velit.</div
+      >
+      <div
+        >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum, ipsa distinctio architecto aperiam assumenda officia repudiandae
+        numquam similique accusamus eligendi beatae iusto illo eum quaerat hic minima vero officiis velit.</div
+      >
+      <router-outlet></router-outlet>
+    </div>
+    <div id="footer">
+      <span>© {{ year }} - Suneeh</span>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,23 @@
+.sidenavcontainer {
+  height: 100%;
+}
+.sidenav {
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.3);
+  min-width: 220px;
+}
+.nav-list {
+  display: flex;
+  flex-direction: column;
+}
+.nav-link-item {
+  margin: 0.5em 0;
+  mat-icon {
+    margin-right: 16px;
+  }
+}
+#main {
+  padding: 3em 2em;
+}
+#footer {
+  padding: 3em 2em;
+}
