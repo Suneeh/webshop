@@ -28,10 +28,15 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
 
 # TODOs
 
-- Build Landing Page
-- ...
-
-# DONE
-
-- ~~Write Blog Article~~
-- ~~Deploy It~~
+- General
+  - Redirect / to /dashboard
+- Shell
+  - Make the Profile Icon a Button
+  - Build Footer with hotlinks and more information
+  - Create a company logo
+  - Add the company logo to the sidebar and switch the Dashboard option for it
+- Category Page
+  - Mock Category for the Page
+  - Build a Page that shows Child Categories, Description, and Products
+- Dashboard
+  - Build Landing Page
