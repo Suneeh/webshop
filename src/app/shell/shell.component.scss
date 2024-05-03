@@ -15,9 +15,19 @@
     margin-right: 16px;
   }
 }
+.head-bar {
+  display: flex;
+  align-items: center;
+}
+.head-bar-action {
+  margin: 0 0 0 auto;
+  display: flex;
+}
 #main {
-  padding: 3em 2em;
+  padding: 0 2em 3em;
 }
 #footer {
   padding: 3em 2em;
+  display: flex;
+  gap: 1em;
 }

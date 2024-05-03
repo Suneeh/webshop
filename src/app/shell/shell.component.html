@@ -1,15 +1,22 @@
 <mat-sidenav-container autosize class="sidenavcontainer">
   <mat-sidenav #sidenav mode="side" opened class="sidenav">
     <mat-nav-list class="nav-list" dense>
-      <a [routerLink]="['/']" class="nav-link-item" mat-list-item>
+      <a [routerLink]="['/', 'dashboard']" class="nav-link-item" mat-list-item>
         <mat-icon matListItemIcon>home</mat-icon>
-        <span matListItemTitle>Home</span>
+        <span matListItemTitle>Dashboard</span>
       </a>
-
-      <a [routerLink]="['/']" class="nav-link-item" mat-list-item>
-        <mat-icon matListItemIcon>home</mat-icon>
-        <span matListItemTitle>i am a very long category</span>
+      @for(category of (categories | async); track category.id){
+      <a [routerLink]="['/', 'category', category.id]" class="nav-link-item" mat-list-item>
+        <span matListItemTitle>{{ category.name }}</span>
       </a>
+      @for(childCategory of category.childCategories; track childCategory.id){
+      <a [routerLink]="['/', 'category', childCategory.id]" class="nav-link-item" mat-list-item>
+        <mat-icon matListItemIcon>chevron_right</mat-icon>
+        <span matListItemTitle>{{ childCategory.name }}</span>
+      </a>
+      }
+      <mat-divider></mat-divider>
+      }
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -20,24 +27,16 @@
           <a href="https://github.com/Suneeh/webshop" rel="noopener noreferrer" target="_blank">github</a>.
         </span>
       </mat-toolbar>
+      <mat-toolbar class="head-bar">
+        <a class="head-bar-action"><mat-icon>person</mat-icon></a>
+      </mat-toolbar>
     </div>
     <div id="main">
-      <div
-        >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum, ipsa distinctio architecto aperiam assumenda officia repudiandae
-        numquam similique accusamus eligendi beatae iusto illo eum quaerat hic minima vero officiis velit.</div
-      >
-      <div
-        >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum, ipsa distinctio architecto aperiam assumenda officia repudiandae
-        numquam similique accusamus eligendi beatae iusto illo eum quaerat hic minima vero officiis velit.</div
-      >
-      <div
-        >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum, ipsa distinctio architecto aperiam assumenda officia repudiandae
-        numquam similique accusamus eligendi beatae iusto illo eum quaerat hic minima vero officiis velit.</div
-      >
       <router-outlet></router-outlet>
     </div>
     <div id="footer">
       <span>© {{ year }} - Suneeh</span>
+      <span><a href="https://github.com/Suneeh/webshop" rel="noopener noreferrer" target="_blank">github</a></span>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
