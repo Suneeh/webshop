@@ -5,6 +5,3 @@
 # System files
 .DS_Store
 Thumbs.db
-
-# Secrets
-deploy.sh
