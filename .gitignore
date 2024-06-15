@@ -5,3 +5,9 @@
 # System files
 .DS_Store
 Thumbs.db
+
+# Backend files
+/backend/.vs/*
+/backend/**/obj
+/backend/**/bin
+/backend/appsettings.Development.json
