@@ -1,4 +1,4 @@
-﻿namespace backend.ShopDbContext;
+﻿namespace backend.Database;
 
 public class Product(string name, double netPrice, double taxRate)
 {

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using backend.ShopDbContext;
+using backend.Database;
+using backend.Api.Products;
 
 var builder = WebApplication.CreateBuilder(args);
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

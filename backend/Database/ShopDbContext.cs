@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-namespace backend.ShopDbContext;
+namespace backend.Database;
 
 public class ShopDbContext(DbContextOptions<ShopDbContext> options) : DbContext(options)
 {

@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
-using backend.ShopDbContext;
+using backend.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
+namespace backend.Api.Products;
 
 public static class ProductApi
 {
