@@ -9,7 +9,7 @@ public static class ProductApi
 {
     public static void RegisterProductEndpoints(this WebApplication app)
     {
-        var product = app.MapGroup("/product").WithTags("Product");
+        var product = app.MapGroup("/products").WithTags("Products");
 
         product.MapGet("/{id}", async (
             [FromRoute] int id,
@@ -20,6 +20,13 @@ public static class ProductApi
                 ? Results.Ok(product)
                 : Results.NotFound();
         });
+
+        product.MapGet("/", async (
+            [FromServices] ShopDbContext ctx
+        ) =>
+        {
+            return await ctx.Products.ToArrayAsync();
+        }).RequireAuthorization("manage");
 
         product.MapPut("/", async (
             [FromBody] ProductPutDto dto,
@@ -66,7 +73,7 @@ public static class ProductApi
         {
             await ctx.Products.Where(product => product.Id == id).ExecuteDeleteAsync();
             return Results.Ok();
-        });
+        }).RequireAuthorization("manage");
 
     }
 

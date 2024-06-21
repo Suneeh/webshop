@@ -4,21 +4,24 @@ import { RouterModule } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { AuthService, User } from '@auth0/auth0-angular';
+import { MatButtonModule } from '@angular/material/button';
+import { ExternalApiService } from '../services/backend-api.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-shell',
   standalone: true,
-  imports: [MatSidenavModule, RouterModule, MatListModule, MatIconModule, MatToolbarModule, CommonModule],
+  imports: [MatSidenavModule, RouterModule, MatListModule, MatButtonModule, MatIconModule, MatToolbarModule, CommonModule],
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.scss',
 })
 export class ShellComponent {
   public categories = new Observable<Category[]>();
   year = new Date().getFullYear();
-  constructor() {
+  constructor(public auth: AuthService, public apiService: ExternalApiService) {
     this.categories = of([
       { id: 1, name: '1st Category', childCategories: [] },
       { id: 2, name: '2nd Category', childCategories: [] },
@@ -31,6 +34,35 @@ export class ShellComponent {
         ],
       },
     ]);
+  }
+
+  loginWithRedirect() {
+    this.auth.loginWithRedirect({ authorizationParams: { scope: 'manage' } });
+  }
+
+  logout() {
+    this.auth.logout({ logoutParams: { returnTo: window.location.origin } });
+  }
+
+  logUser(user: User) {
+    this.auth
+      .getAccessTokenSilently()
+      .pipe(
+        map((token) => {
+          return console.log(token);
+        })
+      )
+      .subscribe();
+    console.log(user);
+
+    this.apiService
+      .getProducts()
+      .pipe(
+        map((products) => {
+          return console.log(products);
+        })
+      )
+      .subscribe();
   }
 }
 

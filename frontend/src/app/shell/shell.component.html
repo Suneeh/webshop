@@ -28,7 +28,15 @@
         </span>
       </mat-toolbar>
       <mat-toolbar class="head-bar">
-        <a class="head-bar-action"><mat-icon>person</mat-icon></a>
+        @if((auth.isAuthenticated$ | async) === false){
+        <button mat-stroked-button (click)="loginWithRedirect()">Log in</button>
+        }@else {
+        <button mat-stroked-button (click)="logout()"> Log out </button>
+        @if(auth.user$ | async; as user){
+        <img [src]="user.picture" style="width: 40px" />
+        <span>{{ user.nickname }}</span>
+        <button mat-button (click)="logUser(user)">logme</button>
+        } }
       </mat-toolbar>
     </div>
     <div id="main">

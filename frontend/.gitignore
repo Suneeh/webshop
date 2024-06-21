@@ -39,3 +39,4 @@ Thumbs.db
 
 # Secrets
 deploy.sh
+auth_config.json
