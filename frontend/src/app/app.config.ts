@@ -20,6 +20,8 @@ export const appConfig: ApplicationConfig = {
         scope: 'openid profile email manage',
       },
       httpInterceptor: env.httpInterceptor,
+      cacheLocation: 'localstorage',
+      useRefreshTokens: true,
     }),
   ],
 };

@@ -20,7 +20,7 @@ Use `npm install` to install all packages and dependancies.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Copy the `./auth_config.example.json` [file](https://github.com/Suneeh/webshop/blob/main/frontend/auth_config.example.json) and remove the `example` fill it with your own values. After that run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Deployment
 
@@ -28,18 +28,25 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
 
 # TODOs
 
+- Auth
+  - Build a login mask instead of redirecting to Auth0
+- Docker
+  - Build a Docker Compose that starts
+    - Database
+    - Backend
+    - Frontend
 - General
   - Redirect / to /dashboard
+  - Add guards that read the accesstoken for roles (and email verification?)
 - Shell
-  - Make the Profile Icon a Button
   - Build Footer with hotlinks and more information
   - Create a company logo
   - Add the company logo to the sidebar and switch the Dashboard option for it
 - Category Page
-  - Mock Category for the Page
   - Build a Page that shows Child Categories, Description, and Products
 - Dashboard
   - Build Landing Page
 - Backend
   - Build CRUD Endpoints for Categories
-  - Build CRUD Endpoints for Products
+- ApiClient
+  - Build a Frontend Api Client that calls the backend correctly
