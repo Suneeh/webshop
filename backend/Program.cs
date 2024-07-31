@@ -4,7 +4,6 @@ using backend.Api.Products;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using backend.Authorization;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Net.Http.Headers;
 using Microsoft.IdentityModel.Tokens;
 using App.Middlewares;
 
@@ -12,8 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ShopDbContext>(opt => opt.UseNpgsql(connectionString));
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddCors(options
-  => options.AddPolicy(name: "name", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+builder.Services.AddCors(options => options.AddPolicy(
+    name: "name",
+    builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
+));
 
 builder.Services.AddOpenApiDocument(config =>
 {

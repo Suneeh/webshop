@@ -26,7 +26,7 @@ public static class ProductApi
         ) =>
         {
             return await ctx.Products.ToArrayAsync();
-        }).RequireAuthorization("manage");
+        });
 
         product.MapPut("/", async (
             [FromBody] ProductPutDto dto,
@@ -42,7 +42,7 @@ public static class ProductApi
             ctx.Products.Add(product);
             await ctx.SaveChangesAsync();
             return Results.Ok();
-        });
+        }).RequireAuthorization("manage");
 
         product.MapPatch("/{id}", async (
             [FromRoute] int id,
@@ -64,7 +64,7 @@ public static class ProductApi
             product.ChangedDate = time.GetUtcNow();
             await ctx.SaveChangesAsync();
             return Results.Ok();
-        });
+        }).RequireAuthorization("manage");
 
         product.MapDelete("/{id}", async (
             [FromRoute] int id,
