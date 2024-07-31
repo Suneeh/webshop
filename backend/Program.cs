@@ -6,6 +6,7 @@ using backend.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using App.Middlewares;
+using backend.Api.Categories;
 
 var builder = WebApplication.CreateBuilder(args);
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -67,6 +68,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseSecureHeaders();
 app.RegisterProductEndpoints();
+app.RegisterCategoryEndpoints();
 app.UseCors("name");
 
 app.Run();

@@ -34,10 +34,16 @@ public static class ProductApi
             [FromServices] ShopDbContext ctx
         ) =>
         {
+            var categoryExists = await ctx.Categories.FindAsync(dto.CategoryId);
+            if (categoryExists == null)
+            {
+                return Results.BadRequest();
+            }
             var product = new Product(dto.Name, dto.NetPrice, dto.TaxRate)
             {
                 ChangedDate = time.GetUtcNow(),
                 Description = dto.Description,
+                CategoryId = dto.CategoryId
             };
             ctx.Products.Add(product);
             await ctx.SaveChangesAsync();
@@ -61,6 +67,8 @@ public static class ProductApi
                 product.TaxRate = dto.TaxRate.NewValue;
             if (dto.NetPrice != null)
                 product.NetPrice = dto.NetPrice.NewValue;
+            if (dto.CategoryId != null)
+                product.CategoryId = dto.CategoryId.NewValue;
             product.ChangedDate = time.GetUtcNow();
             await ctx.SaveChangesAsync();
             return Results.Ok();
@@ -86,6 +94,8 @@ public static class ProductApi
         public required double NetPrice { get; init; }
         [Required]
         public required double TaxRate { get; init; }
+        [Required]
+        public required int? CategoryId { get; init; }
     }
 
     public record ProductPatchDto
@@ -94,9 +104,10 @@ public static class ProductApi
         public required RequiredValue<string>? Description { get; init; }
         public required RequiredValue<double>? NetPrice { get; init; }
         public required RequiredValue<double>? TaxRate { get; init; }
+        public required RequiredValue<int?>? CategoryId { get; init; }
     }
 
-    public record RequiredValue<T> where T : notnull
+    public record RequiredValue<T>
     {
         [Required]
         public required T NewValue { get; init; }

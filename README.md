@@ -46,7 +46,5 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
   - Build a Page that shows Child Categories, Description, and Products
 - Dashboard
   - Build Landing Page
-- Backend
-  - Build CRUD Endpoints for Categories
 - ApiClient
   - Build a Frontend Api Client that calls the backend correctly
