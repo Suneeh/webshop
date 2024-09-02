@@ -16,16 +16,38 @@ public static class ProductApi
             [FromServices] ShopDbContext ctx
         ) =>
         {
-            return await ctx.Products.FindAsync(id) is Product product
-                ? Results.Ok(product)
-                : Results.NotFound();
+            var dbResult = await ctx.Products.FindAsync(id);
+            if (dbResult == null)
+                return Results.NotFound();
+            else
+                return Results.Ok(new ProductGetDto
+                {
+                    Id = dbResult.Id,
+                    Name = dbResult.Name,
+                    Description = dbResult.Description,
+                    NetPrice = dbResult.NetPrice,
+                    TaxRate = dbResult.TaxRate,
+                    CreationDate = dbResult.CreationDate,
+                    ChangedDate = dbResult.ChangedDate,
+                    CategoryId = dbResult.CategoryId,
+                });
         });
 
         product.MapGet("/", async (
             [FromServices] ShopDbContext ctx
         ) =>
         {
-            return await ctx.Products.ToArrayAsync();
+            return await ctx.Products.Select(prod => new ProductGetDto
+            {
+                Id = prod.Id,
+                Name = prod.Name,
+                Description = prod.Description,
+                NetPrice = prod.NetPrice,
+                TaxRate = prod.TaxRate,
+                CreationDate = prod.CreationDate,
+                ChangedDate = prod.ChangedDate,
+                CategoryId = prod.CategoryId,
+            }).ToArrayAsync();
         });
 
         product.MapPut("/", async (
@@ -83,6 +105,18 @@ public static class ProductApi
             return Results.Ok();
         }).RequireAuthorization("manage");
 
+    }
+
+    public record ProductGetDto
+    {
+        public required int Id { get; init; }
+        public required string Name { get; init; }
+        public required string? Description { get; init; }
+        public required double NetPrice { get; init; }
+        public required double TaxRate { get; init; }
+        public required DateTimeOffset CreationDate { get; init; }
+        public required DateTimeOffset ChangedDate { get; init; }
+        public required int? CategoryId { get; init; }
     }
 
     public record ProductPutDto
