@@ -23,7 +23,6 @@
     <None Remove="Database\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Api/Product/" />
     <Folder Include="Database\" />
   </ItemGroup>
 </Project>

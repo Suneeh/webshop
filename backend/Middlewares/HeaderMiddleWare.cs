@@ -1,4 +1,4 @@
-namespace App.Middlewares;
+namespace backend.Middlewares;
 class SecureHeadersMiddleware(RequestDelegate next)
 {
     private readonly RequestDelegate _next = next;

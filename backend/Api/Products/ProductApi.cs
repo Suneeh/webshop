@@ -9,9 +9,9 @@ public static class ProductApi
 {
     public static void RegisterProductEndpoints(this WebApplication app)
     {
-        var product = app.MapGroup("/products").WithTags("Products");
+        var productRouteGroup = app.MapGroup("/products").WithTags("Products");
 
-        product.MapGet("/{id}", async (
+        productRouteGroup.MapGet("/{id}", async (
             [FromRoute] int id,
             [FromServices] ShopDbContext ctx
         ) =>
@@ -33,7 +33,7 @@ public static class ProductApi
                 });
         });
 
-        product.MapGet("/", async (
+        productRouteGroup.MapGet("/", async (
             [FromServices] ShopDbContext ctx
         ) =>
         {
@@ -50,7 +50,7 @@ public static class ProductApi
             }).ToArrayAsync();
         });
 
-        product.MapPut("/", async (
+        productRouteGroup.MapPut("/", async (
             [FromBody] ProductPutDto dto,
             [FromServices] TimeProvider time,
             [FromServices] ShopDbContext ctx
@@ -72,7 +72,7 @@ public static class ProductApi
             return Results.Ok();
         }).RequireAuthorization("manage");
 
-        product.MapPatch("/{id}", async (
+        productRouteGroup.MapPatch("/{id}", async (
             [FromRoute] int id,
             [FromBody] ProductPatchDto dto,
             [FromServices] TimeProvider time,
@@ -96,7 +96,7 @@ public static class ProductApi
             return Results.Ok();
         }).RequireAuthorization("manage");
 
-        product.MapDelete("/{id}", async (
+        productRouteGroup.MapDelete("/{id}", async (
             [FromRoute] int id,
             [FromServices] ShopDbContext ctx
         ) =>

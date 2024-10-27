@@ -9,26 +9,20 @@ public static class CategoryApi
 {
     public static void RegisterCategoryEndpoints(this WebApplication app)
     {
-        var category = app.MapGroup("/categories").WithTags("Categories");
+        var categoryRouteGroup = app.MapGroup("/categories").WithTags("Categories");
 
-        category.MapGet("/{id}", async (
+        categoryRouteGroup.MapGet("/{id:int}", async (
             [FromRoute] int id,
             [FromServices] ShopDbContext ctx
-        ) =>
-        {
-            return await ctx.Categories.FindAsync(id) is Category category
-                ? Results.Ok(category)
-                : Results.NotFound();
-        });
+        ) => await ctx.Categories.FindAsync(id) is { } category
+            ? Results.Ok((object?)category)
+            : Results.NotFound());
 
-        category.MapGet("/", async (
+        categoryRouteGroup.MapGet("/", async (
             [FromServices] ShopDbContext ctx
-        ) =>
-        {
-            return await ctx.Categories.ToArrayAsync();
-        });
+        ) => await ctx.Categories.ToArrayAsync());
 
-        category.MapPut("/", async (
+        categoryRouteGroup.MapPut("/", async (
             [FromBody] CategoryPutDto dto,
             [FromServices] TimeProvider time,
             [FromServices] ShopDbContext ctx
@@ -43,7 +37,7 @@ public static class CategoryApi
             return Results.Ok();
         }).RequireAuthorization("manage");
 
-        category.MapPatch("/{id}", async (
+        categoryRouteGroup.MapPatch("/{id:int}", async (
             [FromRoute] int id,
             [FromBody] CategoryPatchDto dto,
             [FromServices] TimeProvider time,
@@ -60,7 +54,7 @@ public static class CategoryApi
             return Results.Ok();
         }).RequireAuthorization("manage");
 
-        category.MapDelete("/{id}", async (
+        categoryRouteGroup.MapDelete("/{id:int}", async (
             [FromRoute] int id,
             [FromServices] ShopDbContext ctx
         ) =>

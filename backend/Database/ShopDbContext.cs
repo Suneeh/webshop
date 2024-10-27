@@ -8,7 +8,9 @@ public class ShopDbContext(DbContextOptions<ShopDbContext> options) : DbContext(
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
-		modelBuilder.Entity<Product>().HasOne(x => x.Category).WithMany(x => x.Products);
+		modelBuilder.Entity<Product>()
+			.HasOne(x => x.Category)
+			.WithMany(x => x.Products);
 	}
 }
 

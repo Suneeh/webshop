@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using backend.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
-using App.Middlewares;
 using backend.Api.Categories;
+using backend.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -14,7 +14,7 @@ builder.Services.AddDbContext<ShopDbContext>(opt => opt.UseNpgsql(connectionStri
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(options => options.AddPolicy(
     name: "name",
-    builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
+    b => b.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
 ));
 
 builder.Services.AddOpenApiDocument(config =>
@@ -58,9 +58,9 @@ if (app.Environment.IsDevelopment())
         config.DocExpansion = "list";
     });
 }
-using (var Scope = app.Services.CreateScope())
+using (var scope = app.Services.CreateScope())
 {
-    var context = Scope.ServiceProvider.GetRequiredService<ShopDbContext>();
+    var context = scope.ServiceProvider.GetRequiredService<ShopDbContext>();
     context.Database.Migrate();
 }
 

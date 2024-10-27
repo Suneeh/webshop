@@ -1,11 +1,11 @@
-using backend.Authorization;
 using Microsoft.AspNetCore.Authorization;
+
+namespace backend.Authorization;
 
 class RbacHandler : AuthorizationHandler<RbacRequirement>
 {
     protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, RbacRequirement requirement)
     {
-        var claims = context.User.Claims;
         if (!context.User.HasClaim(c => c.Type == "permissions"))
         {
             return Task.CompletedTask;
