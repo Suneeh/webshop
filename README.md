@@ -33,7 +33,7 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
 - Auth
   - Build a login mask instead of redirecting to Auth0
 - Docker
-  - Build a Docker Compose that starts
+  - Build a Docker Compose that starts:
     - Database
     - Backend
     - Frontend
