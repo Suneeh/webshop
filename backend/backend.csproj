@@ -18,11 +18,4 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.3" />
     <PackageReference Include="NSwag.AspNetCore" Version="14.2.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Database\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Database\" />
-  </ItemGroup>
 </Project>
