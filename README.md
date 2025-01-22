@@ -20,6 +20,8 @@ Use `npm install` to install all packages and dependancies.
 
 ## Development server
 
+Run `docker run --name webshopDb -e POSTGRES_PASSWORD=MYPASSWORD -p 5432:5432 -d postgres` to create a Postgres DB for your Backend to connect to.
+
 Copy the `./auth_config.example.json` [file](https://github.com/Suneeh/webshop/blob/main/frontend/auth_config.example.json) and remove the `example` fill it with your own values. After that run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Deployment
