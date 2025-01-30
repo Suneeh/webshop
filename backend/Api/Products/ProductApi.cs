@@ -19,18 +19,18 @@ public static class ProductApi
             var dbResult = await ctx.Products.FindAsync(id);
             if (dbResult == null)
                 return Results.NotFound();
-            else
-                return Results.Ok(new ProductGetDto
-                {
-                    Id = dbResult.Id,
-                    Name = dbResult.Name,
-                    Description = dbResult.Description,
-                    NetPrice = dbResult.NetPrice,
-                    TaxRate = dbResult.TaxRate,
-                    CreationDate = dbResult.CreationDate,
-                    ChangedDate = dbResult.ChangedDate,
-                    CategoryId = dbResult.CategoryId,
-                });
+            
+            return Results.Ok(new ProductGetDto
+            {
+                Id = dbResult.Id,
+                Name = dbResult.Name,
+                Description = dbResult.Description,
+                NetPrice = dbResult.NetPrice,
+                TaxRate = dbResult.TaxRate,
+                CreationDate = dbResult.CreationDate,
+                ChangedDate = dbResult.ChangedDate,
+                CategoryId = dbResult.CategoryId,
+            });
         });
 
         productRouteGroup.MapGet("/", async (

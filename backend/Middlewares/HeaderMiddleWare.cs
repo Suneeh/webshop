@@ -1,8 +1,7 @@
 namespace backend.Middlewares;
-class SecureHeadersMiddleware(RequestDelegate next)
-{
-    private readonly RequestDelegate _next = next;
 
+internal class SecureHeadersMiddleware(RequestDelegate next)
+{
     public async Task InvokeAsync(HttpContext context)
     {
         context.Response.Headers.Append("X-XSS-Protection", "0");
@@ -13,7 +12,7 @@ class SecureHeadersMiddleware(RequestDelegate next)
         context.Response.Headers.Append("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
         context.Response.Headers.Append("Pragma", "no-cache");
 
-        await _next(context);
+        await next(context);
     }
 }
 
