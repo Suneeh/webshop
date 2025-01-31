@@ -11,12 +11,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { ExternalApiService } from '../services/backend-api.service';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'app-shell',
-  standalone: true,
-  imports: [MatSidenavModule, RouterModule, MatListModule, MatButtonModule, MatIconModule, MatToolbarModule, CommonModule],
-  templateUrl: './shell.component.html',
-  styleUrl: './shell.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-shell',
+    imports: [MatSidenavModule, RouterModule, MatListModule, MatButtonModule, MatIconModule, MatToolbarModule, CommonModule],
+    templateUrl: './shell.component.html',
+    styleUrl: './shell.component.scss'
 })
 export class ShellComponent {
   public categories = new Observable<Category[]>();
