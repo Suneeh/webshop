@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -9,4 +10,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './category.component.html',
   styleUrl: './category.component.scss',
 })
-export class CategoryComponent {}
+export class CategoryComponent {
+  route: ActivatedRoute = inject(ActivatedRoute);
+  categoryId = -1;
+  constructor() {
+    this.categoryId = Number(this.route.snapshot.params['id']);
+  }
+}
