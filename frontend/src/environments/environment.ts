@@ -1,6 +1,6 @@
 import config from '../../auth_config.json';
 
-const {
+export const {
   domain,
   clientId,
   authorizationParams: { audience },

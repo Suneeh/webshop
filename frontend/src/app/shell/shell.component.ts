@@ -8,19 +8,19 @@ import { Observable, map, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { AuthService, User } from '@auth0/auth0-angular';
 import { MatButtonModule } from '@angular/material/button';
-import { ExternalApiService } from '../services/backend-api.service';
+import { ApiService } from '../services/api.service.ts/backend-api.service';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'app-shell',
-    imports: [MatSidenavModule, RouterModule, MatListModule, MatButtonModule, MatIconModule, MatToolbarModule, CommonModule],
-    templateUrl: './shell.component.html',
-    styleUrl: './shell.component.scss'
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-shell',
+  imports: [MatSidenavModule, RouterModule, MatListModule, MatButtonModule, MatIconModule, MatToolbarModule, CommonModule],
+  templateUrl: './shell.component.html',
+  styleUrl: './shell.component.scss'
 })
 export class ShellComponent {
   public categories = new Observable<Category[]>();
   year = new Date().getFullYear();
-  constructor(public auth: AuthService, public apiService: ExternalApiService) {
+  constructor(public auth: AuthService, public apiService: ApiService) {
     this.categories = of([
       { id: 1, name: '1st Category', childCategories: [] },
       { id: 2, name: '2nd Category', childCategories: [] },

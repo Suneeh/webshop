@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using backend.Database;
+using backend.Database.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

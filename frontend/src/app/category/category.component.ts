@@ -1,18 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../services/api.service.ts/backend-api.service';
+import { combineLatest, map, switchMap } from 'rxjs';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'app-category',
-    imports: [CommonModule],
-    templateUrl: './category.component.html',
-    styleUrl: './category.component.scss'
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-category',
+  imports: [CommonModule],
+  templateUrl: './category.component.html',
+  styleUrl: './category.component.scss'
 })
 export class CategoryComponent {
-  route: ActivatedRoute = inject(ActivatedRoute);
-  categoryId = -1;
-  constructor() {
-    this.categoryId = Number(this.route.snapshot.params['id']);
-  }
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  private api = inject(ApiService);
+  public category$ = this.route.paramMap.pipe(
+    switchMap((params) => this.api.getCategory(+(params.get('id') ?? '')))
+  );
 }

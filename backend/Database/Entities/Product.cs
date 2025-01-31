@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace backend.Database;
+namespace backend.Database.Entities;
 
 public class Product(string name, double netPrice, double taxRate)
 {
