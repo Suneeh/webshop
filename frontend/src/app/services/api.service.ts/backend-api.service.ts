@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, resource } from '@angular/core';
-import { apiUri, environment as env } from '../../../environments/environment';
+import { apiUri } from '../../../environments/environment';
 import { Observable, tap } from 'rxjs';
 import { AuthService } from '@auth0/auth0-angular';
 import { GetCategoryDto } from './dtos/categories/get-category-dto';

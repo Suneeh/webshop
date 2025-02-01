@@ -23,7 +23,8 @@
     <div id="header">
       <mat-toolbar color="accent">
         <span>
-          Follow this project on <a href="https://dev.to/suneeh" rel="noopener noreferrer" target="_blank">dev.to</a> and on
+          Follow this project on <a href="https://dev.to/suneeh" rel="noopener noreferrer" target="_blank">dev.to</a>
+          and on
           <a href="https://github.com/Suneeh/webshop" rel="noopener noreferrer" target="_blank">github</a>.
         </span>
       </mat-toolbar>
@@ -33,7 +34,7 @@
         }@else {
         <button mat-stroked-button (click)="logout()"> Log out </button>
         @if(auth.user$ | async; as user){
-        <img [src]="user.picture" style="width: 40px" />
+        <img [src]="user.picture" style="width: 40px" alt="Profile Picture" />
         <span>{{ user.nickname }}</span>
         <button mat-button (click)="logUser(user)">logme</button>
         } }

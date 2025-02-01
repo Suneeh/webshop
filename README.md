@@ -50,3 +50,5 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
   - Build Landing Page
 - ApiClient
   - Build a Frontend Api Client that calls the backend correctly
+- Misc
+  - Add linting
