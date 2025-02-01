@@ -32,6 +32,9 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
 
 - Auth
   - [ ] Build a login mask instead of redirecting to Auth0
+  - [x] ~~Login~~
+  - [x] ~~Add auth to the Backend~~
+  - [x] ~~Use Auth correctly~~
 - Docker
   - [ ] Build a Docker Compose that starts:
     - [ ] Database
@@ -44,13 +47,13 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
   - [ ] Build Footer with hotlinks and more information
   - [ ] Create a company logo
   - [ ] Add the company logo to the sidebar and switch the Dashboard option for it
-- Category Page 
-  - [x] Description
+- Category Page
+  - [x] ~~Description~~
   - [ ] Products
 - Dashboard
   - [ ] Build Landing Page
 - Api Client
-  - [x] Build a Frontend Api Client that calls the backend correctly
+  - [x] ~~Build a Frontend Api Client that calls the backend correctly~~
 - Misc
-  - [x] Add linting
-  - [x] Update to Ng19
+  - [x] ~~Add linting~~
+  - [x] ~~Update to Ng19~~
