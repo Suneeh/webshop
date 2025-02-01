@@ -31,24 +31,26 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
 # TODOs
 
 - Auth
-  - Build a login mask instead of redirecting to Auth0
+  - [ ] Build a login mask instead of redirecting to Auth0
 - Docker
-  - Build a Docker Compose that starts:
-    - Database
-    - Backend
-    - Frontend
+  - [ ] Build a Docker Compose that starts:
+    - [ ] Database
+    - [ ] Backend
+    - [ ] Frontend
 - General
-  - Redirect / to /dashboard
-  - Add guards that read the accesstoken for roles (and email verification?)
+  - [ ] Redirect / to /dashboard
+  - [ ] Add guards that read the accesstoken for roles (and email verification?)
 - Shell
-  - Build Footer with hotlinks and more information
-  - Create a company logo
-  - Add the company logo to the sidebar and switch the Dashboard option for it
-- Category Page
-  - Build a Page that shows Child Categories, Description, and Products
+  - [ ] Build Footer with hotlinks and more information
+  - [ ] Create a company logo
+  - [ ] Add the company logo to the sidebar and switch the Dashboard option for it
+- Category Page 
+  - [x] Description
+  - [ ] Products
 - Dashboard
-  - Build Landing Page
-- ApiClient
-  - Build a Frontend Api Client that calls the backend correctly
+  - [ ] Build Landing Page
+- Api Client
+  - [x] Build a Frontend Api Client that calls the backend correctly
 - Misc
-  - Add linting
+  - [x] Add linting
+  - [x] Update to Ng19
