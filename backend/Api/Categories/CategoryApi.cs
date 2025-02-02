@@ -15,13 +15,19 @@ public static class CategoryApi
         categoryRouteGroup.MapGet("/{id:int}", async (
             [FromRoute] int id,
             [FromServices] ShopDbContext ctx
-        ) => await ctx.Categories.FindAsync(id) is { } category
-            ? Results.Ok((object?)category)
-            : Results.NotFound());
+        ) =>
+        {
+            return await ctx.Categories.FindAsync(id) is { } category
+                ? Results.Ok((object?)category)
+                : Results.NotFound();
+        });
 
         categoryRouteGroup.MapGet("/", async (
             [FromServices] ShopDbContext ctx
-        ) => await ctx.Categories.ToArrayAsync());
+        ) =>
+        {
+            return await ctx.Categories.ToArrayAsync();
+        });
 
         categoryRouteGroup.MapPut("/", async (
             [FromBody] CategoryPutDto dto,
@@ -63,13 +69,11 @@ public static class CategoryApi
             await ctx.Categories.Where(category => category.Id == id).ExecuteDeleteAsync();
             return Results.Ok();
         }).RequireAuthorization("manage");
-
     }
 
     public record CategoryPutDto
     {
-        [Required]
-        public required string Name { get; init; }
+        [Required] public required string Name { get; init; }
         public string? Description { get; init; }
     }
 
@@ -81,7 +85,6 @@ public static class CategoryApi
 
     public record RequiredValue<T> where T : notnull
     {
-        [Required]
-        public required T NewValue { get; init; }
+        [Required] public required T NewValue { get; init; }
     }
 }

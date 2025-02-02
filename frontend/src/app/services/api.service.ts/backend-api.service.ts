@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, resource } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { apiUri } from '../../../environments/environment';
-import { Observable, tap } from 'rxjs';
-import { AuthService } from '@auth0/auth0-angular';
 import { GetCategoryDto } from './dtos/categories/get-category-dto';
 import { PutCategoryDto } from './dtos/categories/put-category-dto';
 import { GetProductDto } from './dtos/products/get-product-dto';
@@ -11,25 +10,8 @@ import { GetProductDto } from './dtos/products/get-product-dto';
   providedIn: 'root',
 })
 export class ApiService {
-  private auth = inject(AuthService);
   private http = inject(HttpClient)
-  private headers: HeadersInit | undefined;
-
-  constructor() {
-    this.auth.getAccessTokenSilently().pipe(tap(token => {
-      if (token) {
-        this.headers = {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        }
-      }
-      else {
-        this.headers = {
-          'Content-Type': 'application/json'
-        }
-      }
-    })).subscribe();
-  }
+  public headers: HeadersInit | undefined;
 
   getProducts(): Observable<GetProductDto[]> {
     return this.http.get<GetProductDto[]>(`${apiUri}/products/`);
@@ -44,18 +26,17 @@ export class ApiService {
   }
 
   putCategoryResource(category: PutCategoryDto) {
-    return resource({
-      loader: () => {
-        return fetch(`${apiUri}/categories/`, {
-          method: "PUT",
-          headers: this.headers,
-          body: JSON.stringify(category)
-        });
-      },
+    return fetch(`${apiUri}/categories/`, {
+      method: "PUT",
+      headers: this.headers, 
+      /**
+       * TODO - those are never being set - Need to look something like this 
+      {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+       */
+      body: JSON.stringify(category)
     });
   }
 }
-
-
-
-

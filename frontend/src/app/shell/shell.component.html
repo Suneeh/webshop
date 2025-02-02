@@ -36,7 +36,6 @@
         @if(auth.user$ | async; as user){
         <img [src]="user.picture" style="width: 40px" alt="Profile Picture" />
         <span>{{ user.nickname }}</span>
-        <button mat-button (click)="logUser(user)">logme</button>
         } }
       </mat-toolbar>
     </div>

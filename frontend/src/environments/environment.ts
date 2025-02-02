@@ -1,3 +1,4 @@
+import { HttpMethod } from '@auth0/auth0-angular';
 import config from '../../auth_config.json';
 
 export const {
@@ -31,6 +32,27 @@ export const environment = {
     allowedList: [
       {
         uri: `${apiUri}/*`,
+        httpMethod: HttpMethod.Post,
+        tokenOptions: {
+          authorizationParams: {
+            audience: 'webshop',
+            scope: 'manage',
+          },
+        },
+      },
+      {
+        uri: `${apiUri}/*`,
+        httpMethod: HttpMethod.Put,
+        tokenOptions: {
+          authorizationParams: {
+            audience: 'webshop',
+            scope: 'manage',
+          },
+        },
+      },
+      {
+        uri: `${apiUri}/*`,
+        httpMethod: HttpMethod.Delete,
         tokenOptions: {
           authorizationParams: {
             audience: 'webshop',
