@@ -49,26 +49,29 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
   - [x] ~~Login~~
   - [x] ~~Add auth to the Backend~~
   - [x] ~~Use Auth correctly~~
-- Docker
-  - [ ] Build a Docker Compose that starts:
-    - [ ] Database
-    - [ ] Backend
-    - [ ] Frontend
 - General
-  - [ ] Redirect / to /dashboard
-  - [ ] Add guards that read the accesstoken for roles (and email verification?)
+  - [ ] (Future) Add guards for user specifics or management pages
 - Shell
   - [ ] Build Footer with hotlinks and more information
   - [ ] Create a company logo
-  - [ ] Add the company logo to the sidebar and switch the Dashboard option for it
+    - [ ] Add the company logo to the sidebar
+    - [ ] Add FavIcon
 - Category Page
-  - [x] ~~Description~~
-  - [ ] Products
+  - [x] Description
+  - [x] Products
+  - [ ] Build Sorting
+  - [ ] Build Filtering
+  - [ ] Build Pagination ?
+  - [ ] Build Product Card with color + price(s) -> Call to Action Button redirects to detail page
+- Product Page
+  - [ ] Build entirely ?
 - Dashboard
   - [ ] Build Landing Page
 - Api Client
-  - [x] ~~Build a Frontend Api Client that calls the backend correctly~~
+  - [x] Build a Frontend Api Client that calls the backend correctly
 - Misc
-  - [x] ~~Add linting~~
-  - [x] ~~Update to Ng19~~
-  - [ ] Build Appsettings depending on the starting method (Docker vs. Local)
+  - [x] Add linting
+  - [x] Update to Ng19
+  - [ ] Write Tests for the API(s)
+  - [ ] Check why intellisense is not suggesting imports correctly?
+  - [ ] Build a public API instead of exporting in each file?

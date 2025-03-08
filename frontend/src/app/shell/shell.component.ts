@@ -7,33 +7,26 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
-import { Observable, of } from 'rxjs';
+import { ZvView, ZvViewDataSource } from '@zvoove/components/view';
+import { of } from 'rxjs';
+import { ApiService } from '../services/api.service.ts/backend-api.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-shell',
-  imports: [MatSidenavModule, RouterModule, MatListModule, MatButtonModule, MatIconModule, MatToolbarModule, CommonModule],
+  imports: [MatSidenavModule, RouterModule, MatListModule, MatButtonModule, MatIconModule, MatToolbarModule, CommonModule, ZvView],
   templateUrl: './shell.component.html',
-  styleUrl: './shell.component.scss'
+  styleUrl: './shell.component.scss',
 })
 export class ShellComponent {
   public auth = inject(AuthService);
-  public categories = new Observable<Category[]>();
+  public api = inject(ApiService);
   year = new Date().getFullYear();
-  constructor() {
-    this.categories = of([
-      { id: 1, name: '1st Category', childCategories: [] },
-      { id: 2, name: '2nd Category', childCategories: [] },
-      {
-        id: 3,
-        name: '3rd Category',
-        childCategories: [
-          { id: 4, name: '4th Category', childCategories: [] },
-          { id: 5, name: '4th Category', childCategories: [] },
-        ],
-      },
-    ]);
-  }
+
+  ds = new ZvViewDataSource({
+    loadTrigger$: of({}),
+    loadFn: () => this.api.getCategories(),
+  });
 
   loginWithRedirect() {
     this.auth.loginWithRedirect({ authorizationParams: { scope: 'manage' } });
@@ -42,10 +35,4 @@ export class ShellComponent {
   logout() {
     this.auth.logout({ logoutParams: { returnTo: window.location.origin } });
   }
-}
-
-interface Category {
-  id: number;
-  name: string;
-  childCategories: Category[];
 }

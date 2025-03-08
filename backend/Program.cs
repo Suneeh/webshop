@@ -1,11 +1,10 @@
+using backend.Api;
 using Microsoft.EntityFrameworkCore;
 using backend.Database;
-using backend.Api.Products;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using backend.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
-using backend.Api.Categories;
 using backend.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -67,8 +66,8 @@ using (var scope = app.Services.CreateScope())
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseSecureHeaders();
-app.RegisterProductEndpoints();
-app.RegisterCategoryEndpoints();
+app.RegisterAnonymousEndpoints();
+app.RegisterManageEndpoints();
 app.UseCors("name");
 
 app.Run();

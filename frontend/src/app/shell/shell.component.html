@@ -5,18 +5,13 @@
         <mat-icon matListItemIcon>home</mat-icon>
         <span matListItemTitle>Dashboard</span>
       </a>
-      @for(category of (categories | async); track category.id){
-      <a [routerLink]="['/', 'category', category.id]" class="nav-link-item" mat-list-item>
-        <span matListItemTitle>{{ category.name }}</span>
-      </a>
-      @for(childCategory of category.childCategories; track childCategory.id){
-      <a [routerLink]="['/', 'category', childCategory.id]" class="nav-link-item" mat-list-item>
-        <mat-icon matListItemIcon>chevron_right</mat-icon>
-        <span matListItemTitle>{{ childCategory.name }}</span>
-      </a>
-      }
-      <mat-divider></mat-divider>
-      }
+      <zv-view [dataSource]="ds">
+        @for(category of ds.result(); track category.id){
+        <a [routerLink]="['/', 'category', category.id]" class="nav-link-item" mat-list-item>
+          <span matListItemTitle>{{ category.name }}</span>
+        </a>
+        }
+      </zv-view>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

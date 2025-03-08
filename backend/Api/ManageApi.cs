@@ -4,54 +4,56 @@ using backend.Database.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace backend.Api.Products;
+namespace backend.Api;
 
-public static class ProductApi
+public static class ManageApi
 {
-    public static void RegisterProductEndpoints(this WebApplication app)
+    public static void RegisterManageEndpoints(this WebApplication app)
     {
-        var productRouteGroup = app.MapGroup("/products").WithTags("Products");
+        var manageRouteGroup = app.MapGroup("/manage/").WithTags("Manage").RequireAuthorization("manage");
 
-        productRouteGroup.MapGet("/{id}", async (
+        manageRouteGroup.MapPut("/categories/", async (
+            [FromBody] CategoryPutDto dto,
+            [FromServices] TimeProvider time,
+            [FromServices] ShopDbContext ctx
+        ) =>
+        {
+            var category = new Category(dto.Name)
+            {
+                Description = dto.Description,
+            };
+            ctx.Categories.Add(category);
+            await ctx.SaveChangesAsync();
+            return Results.Ok();
+        });
+
+        manageRouteGroup.MapPatch("/categories/{id:int}", async (
+            [FromRoute] int id,
+            [FromBody] CategoryPatchDto dto,
+            [FromServices] TimeProvider time,
+            [FromServices] ShopDbContext ctx
+        ) =>
+        {
+            var category = await ctx.Categories.FindAsync(id);
+            if (category == null) return Results.NotFound();
+            if (dto.Name != null)
+                category.Name = dto.Name.NewValue;
+            if (dto.Description != null)
+                category.Description = dto.Description.NewValue;
+            await ctx.SaveChangesAsync();
+            return Results.Ok();
+        });
+
+        manageRouteGroup.MapDelete("/categories/{id:int}", async (
             [FromRoute] int id,
             [FromServices] ShopDbContext ctx
         ) =>
         {
-            var dbResult = await ctx.Products.FindAsync(id);
-            if (dbResult == null)
-                return Results.NotFound();
-            
-            return Results.Ok(new ProductGetDto
-            {
-                Id = dbResult.Id,
-                Name = dbResult.Name,
-                Description = dbResult.Description,
-                NetPrice = dbResult.NetPrice,
-                TaxRate = dbResult.TaxRate,
-                CreationDate = dbResult.CreationDate,
-                ChangedDate = dbResult.ChangedDate,
-                CategoryId = dbResult.CategoryId,
-            });
+            await ctx.Categories.Where(category => category.Id == id).ExecuteDeleteAsync();
+            return Results.Ok();
         });
 
-        productRouteGroup.MapGet("/", async (
-            [FromServices] ShopDbContext ctx
-        ) =>
-        {
-            return await ctx.Products.Select(prod => new ProductGetDto
-            {
-                Id = prod.Id,
-                Name = prod.Name,
-                Description = prod.Description,
-                NetPrice = prod.NetPrice,
-                TaxRate = prod.TaxRate,
-                CreationDate = prod.CreationDate,
-                ChangedDate = prod.ChangedDate,
-                CategoryId = prod.CategoryId,
-            }).ToArrayAsync();
-        });
-
-        productRouteGroup.MapPut("/", async (
+        manageRouteGroup.MapPut("/products/", async (
             [FromBody] ProductPutDto dto,
             [FromServices] TimeProvider time,
             [FromServices] ShopDbContext ctx
@@ -62,6 +64,7 @@ public static class ProductApi
             {
                 return Results.BadRequest();
             }
+
             var product = new Product(dto.Name, dto.NetPrice, dto.TaxRate)
             {
                 ChangedDate = time.GetUtcNow(),
@@ -71,9 +74,9 @@ public static class ProductApi
             ctx.Products.Add(product);
             await ctx.SaveChangesAsync();
             return Results.Ok();
-        }).RequireAuthorization("manage");
+        });
 
-        productRouteGroup.MapPatch("/{id}", async (
+        manageRouteGroup.MapPatch("/products/{id:int}", async (
             [FromRoute] int id,
             [FromBody] ProductPatchDto dto,
             [FromServices] TimeProvider time,
@@ -95,42 +98,42 @@ public static class ProductApi
             product.ChangedDate = time.GetUtcNow();
             await ctx.SaveChangesAsync();
             return Results.Ok();
-        }).RequireAuthorization("manage");
+        });
 
-        productRouteGroup.MapDelete("/{id}", async (
+        manageRouteGroup.MapDelete("/products/{id:int}", async (
             [FromRoute] int id,
             [FromServices] ShopDbContext ctx
         ) =>
         {
             await ctx.Products.Where(product => product.Id == id).ExecuteDeleteAsync();
             return Results.Ok();
-        }).RequireAuthorization("manage");
-
+        });
     }
 
-    public record ProductGetDto
+    public record CategoryPutDto
     {
-        public required int Id { get; init; }
-        public required string Name { get; init; }
-        public required string? Description { get; init; }
-        public required double NetPrice { get; init; }
-        public required double TaxRate { get; init; }
-        public required DateTimeOffset CreationDate { get; init; }
-        public required DateTimeOffset ChangedDate { get; init; }
-        public required int? CategoryId { get; init; }
+        [Required] public required string Name { get; init; }
+        public string? Description { get; init; }
+    }
+
+    public record CategoryPatchDto
+    {
+        public required RequiredValue<string>? Name { get; init; }
+        public required RequiredValue<string>? Description { get; init; }
+    }
+
+    public record RequiredValue<T> where T : notnull
+    {
+        [Required] public required T NewValue { get; init; }
     }
 
     public record ProductPutDto
     {
-        [Required]
-        public required string Name { get; init; }
+        [Required] public required string Name { get; init; }
         public string? Description { get; init; }
-        [Required]
-        public required double NetPrice { get; init; }
-        [Required]
-        public required double TaxRate { get; init; }
-        [Required]
-        public required int? CategoryId { get; init; }
+        [Required] public required double NetPrice { get; init; }
+        [Required] public required double TaxRate { get; init; }
+        [Required] public required int? CategoryId { get; init; }
     }
 
     public record ProductPatchDto
@@ -139,12 +142,6 @@ public static class ProductApi
         public required RequiredValue<string>? Description { get; init; }
         public required RequiredValue<double>? NetPrice { get; init; }
         public required RequiredValue<double>? TaxRate { get; init; }
-        public required RequiredValue<int?>? CategoryId { get; init; }
-    }
-
-    public record RequiredValue<T>
-    {
-        [Required]
-        public required T NewValue { get; init; }
+        public required RequiredValue<int>? CategoryId { get; init; }
     }
 }

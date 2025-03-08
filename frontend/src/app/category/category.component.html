@@ -1,9 +1,14 @@
-@let category = (category$ | async);
-<div>
-  @if(category !== null){
-  <h3>{{ category.name }}</h3>
-  <span>{{ category.description }}</span>
-  }@else {
-  <h3>Cannot load content</h3>
-  }
-</div>
+<zv-view [dataSource]="ds">
+  @let category = ds.result();
+  <div class="app-category__category-info">
+    <h3>{{ category?.name }}</h3>
+    <span>{{ category?.description }}</span>
+  </div>
+  <div class="app-category__product-list">
+    @for (product of category?.products; track $index) {
+    <zv-card
+      >{{ product.name }} - <pre>{{ product.description }}</pre>
+    </zv-card>
+    }
+  </div>
+</zv-view>
