@@ -17,11 +17,15 @@ export class ApiService {
     return this.http.get<GetProductDto[]>(`${apiUri}/products/`);
   }
 
+  getProduct(id: string): Observable<GetProductDto> {
+    return this.http.get<GetProductDto>(`${apiUri}/products/${id}`);
+  }
+
   getCategories() {
     return this.http.get<GetCategoryListDto[]>(`${apiUri}/categories/`);
   }
 
-  getCategory(id: number) {
+  getCategory(id: string) {
     return this.http.get<GetCategoryDetailDto>(`${apiUri}/categories/${id}`);
   }
 

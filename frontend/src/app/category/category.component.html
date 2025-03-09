@@ -6,9 +6,7 @@
   </div>
   <div class="app-category__product-list">
     @for (product of category?.products; track $index) {
-    <zv-card
-      >{{ product.name }} - <pre>{{ product.description }}</pre>
-    </zv-card>
+    <app-product-list [product]="product" />
     }
   </div>
 </zv-view>

@@ -59,12 +59,25 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
 - Category Page
   - [x] Description
   - [x] Products
+  - [x] Build Product Card with color + price(s) -> Call to Action Button redirects to detail page
   - [ ] Build Sorting
   - [ ] Build Filtering
   - [ ] Build Pagination ?
-  - [ ] Build Product Card with color + price(s) -> Call to Action Button redirects to detail page
-- Product Page
-  - [ ] Build entirely ?
+- Product-List Page
+  - [x] Build Component with the most important Data available
+  - [ ] Add Db Migration to store color codes
+  - [ ] Fetch color codes from API
+  - [ ] Style Component (Color code should translate into an "image" box of that color)
+- Product-Detail Page
+  - [x] Build stub with link and route working
+  - [ ] Show all the information on the page
+  - [ ] Style the page
+  - [ ] Think about ideas of how to fill the page afterwards
+    - Related Products
+    - Discount ?
+    - Items in Stock ?
+    - Tags ?
+    - Rating(s) of users
 - Dashboard
   - [ ] Build Landing Page
 - Api Client
@@ -72,6 +85,7 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
 - Misc
   - [x] Add linting
   - [x] Update to Ng19
+  - [x] Set locale so prices are shown correctly
   - [ ] Write Tests for the API(s)
   - [ ] Check why intellisense is not suggesting imports correctly?
   - [ ] Build a public API instead of exporting in each file?
