@@ -12,11 +12,14 @@ public class Product(string name, double netPrice, double taxRate)
 	
 	[StringLength(1000)]
 	public string? Description { get; set; }
+	
+	[StringLength(6)]
+	public string ColorCodeHex { get; set; }
 	public DateTimeOffset CreationDate { get; set; } = DateTimeOffset.UtcNow;
 	public DateTimeOffset ChangedDate { get; set; }
 	public double NetPrice { get; set; } = netPrice;
 	public double TaxRate { get; set; } = taxRate;
-	public int? CategoryId { get; set; } = null;
+	public int? CategoryId { get; set; }
 
 	public Category Category
 	{

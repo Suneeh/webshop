@@ -26,6 +26,7 @@ public static class AnonymousApi
                     {
                         Id = product.Id,
                         Name = product.Name,
+                        Color = product.ColorCodeHex,
                         NetPrice = product.NetPrice,
                         TaxRate = product.TaxRate,
                     }).ToArray()
@@ -49,20 +50,21 @@ public static class AnonymousApi
             [FromServices] ShopDbContext ctx
         ) =>
         {
-            var dbResult = await ctx.Products.FindAsync(id);
-            if (dbResult == null)
+            var product = await ctx.Products.FindAsync(id);
+            if (product == null)
                 return Results.NotFound();
             
             return Results.Ok(new GetProductDetailDto
             {
-                Id = dbResult.Id,
-                Name = dbResult.Name,
-                Description = dbResult.Description,
-                NetPrice = dbResult.NetPrice,
-                TaxRate = dbResult.TaxRate,
-                CreationDate = dbResult.CreationDate,
-                ChangedDate = dbResult.ChangedDate,
-                CategoryId = dbResult.CategoryId,
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Color = product.ColorCodeHex,
+                NetPrice = product.NetPrice,
+                TaxRate = product.TaxRate,
+                CreationDate = product.CreationDate,
+                ChangedDate = product.ChangedDate,
+                CategoryId = product.CategoryId,
             });
         });
 
@@ -75,6 +77,7 @@ public static class AnonymousApi
                 Id = prod.Id,
                 Name = prod.Name,
                 Description = prod.Description,
+                Color = prod.ColorCodeHex,
                 NetPrice = prod.NetPrice,
                 TaxRate = prod.TaxRate,
                 CreationDate = prod.CreationDate,
@@ -102,6 +105,7 @@ public static class AnonymousApi
     {
         public required int Id { get; init; }
         public required string Name { get; init; }
+        public required string Color { get; init; }
         public required double NetPrice { get; init; }
         public required double TaxRate { get; init; }
     }
@@ -111,6 +115,7 @@ public static class AnonymousApi
         public required int Id { get; init; }
         public required string Name { get; init; }
         public required string? Description { get; init; }
+        public required string Color { get; init; }
         public required double NetPrice { get; init; }
         public required double TaxRate { get; init; }
         public required DateTimeOffset CreationDate { get; init; }
