@@ -13,5 +13,5 @@ import { GetProductListDto } from '../../services/api.service.ts/dtos/products/g
   styleUrl: './product-list.component.scss',
 })
 export class ProductListComponent {
-  product = input.required<GetProductListDto>();
+  products = input.required<GetProductListDto[]>();
 }

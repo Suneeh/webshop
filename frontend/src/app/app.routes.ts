@@ -6,7 +6,7 @@ export const routes: Routes = [
     loadComponent: () => import('./shell/shell.component').then((c) => c.ShellComponent),
     children: [
       {
-        path: 'dashboard',
+        path: '',
         loadComponent: () => import('./dashboard/dashboard.component').then((c) => c.DashboardComponent),
       },
       {

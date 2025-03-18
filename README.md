@@ -79,7 +79,12 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
     - Tags ?
     - Rating(s) of users
 - Dashboard
+
+  - [x] Newest products
   - [ ] Build Landing Page
+  - [ ] Top selling products (super late - when orders are a thing)
+  - [ ] Special offer products
+
 - Api Client
   - [x] Build a Frontend Api Client that calls the backend correctly
 - Misc
@@ -89,3 +94,4 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
   - [ ] Write Tests for the API(s)
   - [ ] Check why intellisense is not suggesting imports correctly?
   - [ ] Build a public API instead of exporting in each file?
+  - [ ] Brand categories?

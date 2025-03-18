@@ -1,9 +1,9 @@
 <mat-sidenav-container autosize class="sidenavcontainer">
   <mat-sidenav #sidenav mode="side" opened class="sidenav">
     <mat-nav-list class="nav-list" dense>
-      <a [routerLink]="['/', 'dashboard']" class="nav-link-item" mat-list-item>
+      <a [routerLink]="['/']" class="nav-link-item" mat-list-item>
         <mat-icon matListItemIcon>home</mat-icon>
-        <span matListItemTitle>Dashboard</span>
+        <span matListItemTitle>Home</span>
       </a>
       <zv-view [dataSource]="ds">
         @for(category of ds.result(); track category.id){

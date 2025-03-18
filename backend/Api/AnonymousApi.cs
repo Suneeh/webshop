@@ -1,4 +1,6 @@
+using System.Globalization;
 using backend.Database;
+using backend.Database.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,40 +53,63 @@ public static class AnonymousApi
         ) =>
         {
             var product = await ctx.Products.FindAsync(id);
-            if (product == null)
-                return Results.NotFound();
-            
-            return Results.Ok(new GetProductDetailDto
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                Color = product.ColorCodeHex,
-                NetPrice = product.NetPrice,
-                TaxRate = product.TaxRate,
-                CreationDate = product.CreationDate,
-                ChangedDate = product.ChangedDate,
-                CategoryId = product.CategoryId,
-            });
+            return product == null 
+                ? Results.NotFound() 
+                : Results.Ok(TransformProductsToDetailDto(product));
         });
 
-        anonymousRouteGroup.MapGet("/products/", async (
-            [FromServices] ShopDbContext ctx
+        anonymousRouteGroup.MapGet("/products", async (
+            [FromServices] ShopDbContext ctx,
+            [FromQuery] string? sortBy,
+            [FromQuery] string? sortOrder,
+            [FromQuery] int? skip,
+            [FromQuery] int? take
         ) =>
         {
-            return await ctx.Products.Select(prod => new GetProductDetailDto
-            {
-                Id = prod.Id,
-                Name = prod.Name,
-                Description = prod.Description,
-                Color = prod.ColorCodeHex,
-                NetPrice = prod.NetPrice,
-                TaxRate = prod.TaxRate,
-                CreationDate = prod.CreationDate,
-                ChangedDate = prod.ChangedDate,
-                CategoryId = prod.CategoryId
-            }).ToArrayAsync();
+            IQueryable<Product> query = ctx.Products;
+            if (string.IsNullOrEmpty(sortBy))
+                sortBy = "Name";
+            if (string.IsNullOrEmpty(sortOrder))
+                sortOrder = "asc";
+            if (string.IsNullOrEmpty(sortOrder))
+                sortOrder = "asc";
+            sortBy = char.ToUpper(sortBy[0], CultureInfo.InvariantCulture) + sortBy[1..];
+            query = sortOrder == "asc" 
+                ? query.OrderBy(product => EF.Property<object>(product, sortBy))
+                : query.OrderByDescending(product => EF.Property<object>(product, sortBy));
+
+            query = query.Skip(skip ?? 0);
+            query = query.Take(take ?? 15);
+            return TransformProductsToListDto(await query.ToArrayAsync());
         });
+    }
+
+    private static GetProductDetailDto TransformProductsToDetailDto(Product product)
+    {
+        return new GetProductDetailDto
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Description = product.Description,
+            Color = product.ColorCodeHex,
+            NetPrice = product.NetPrice,
+            TaxRate = product.TaxRate,
+            CreationDate = product.CreationDate,
+            ChangedDate = product.ChangedDate,
+            CategoryId = product.CategoryId
+        };
+    }
+
+    private static IEnumerable<GetProductListDto> TransformProductsToListDto(IEnumerable<Product> products)
+    {
+        return products.Select(prod => new GetProductListDto
+        {
+            Id = prod.Id,
+            Name = prod.Name,
+            Color = prod.ColorCodeHex,
+            NetPrice = prod.NetPrice,
+            TaxRate = prod.TaxRate,
+        }).ToList();
     }
     
     public record GetCategoryDetailDto

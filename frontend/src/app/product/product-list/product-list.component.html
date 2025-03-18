@@ -1,8 +1,11 @@
-@let grossPrice = product().netPrice * (product().taxRate / 100 + 1);
-<zv-card>
-  <a [routerLink]="['/product', product().id]">
-    <p> {{ product().name }} - {{ product().color }} </p>
-    <span>{{ grossPrice | currency : 'EUR' }}</span>
-  </a>
-  <button mat-flat-button [color]="'accent'">Add to cart</button>
-</zv-card>
+<div class="app-product-list__container">
+  @for (product of products(); track $index) { @let grossPrice = product.netPrice * (product.taxRate / 100 + 1);
+  <zv-card>
+    <a [routerLink]="['/product', product.id]">
+      <p> {{ product.name }} - {{ product.color }} </p>
+      <span>{{ grossPrice | currency : 'EUR' }}</span>
+    </a>
+    <button mat-flat-button [color]="'accent'">Add to cart</button>
+  </zv-card>
+  }
+</div>

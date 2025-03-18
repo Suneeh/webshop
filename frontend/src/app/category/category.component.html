@@ -4,9 +4,5 @@
     <h3>{{ category?.name }}</h3>
     <span>{{ category?.description }}</span>
   </div>
-  <div class="app-category__product-list">
-    @for (product of category?.products; track $index) {
-    <app-product-list [product]="product" />
-    }
-  </div>
+  <app-product-list [products]="category?.products ?? []" />
 </zv-view>

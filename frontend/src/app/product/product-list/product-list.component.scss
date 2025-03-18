@@ -1,0 +1,5 @@
+.app-product-list__container{
+    display: grid;
+    gap: 2em;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}

@@ -1,1 +1,4 @@
-<h2>Dashboard</h2>
+<zv-view [dataSource]="latestProductsDs">
+  <h2>Brand New</h2>
+  <app-product-list [products]="latestProductsDs.result() ?? []" />
+</zv-view>
