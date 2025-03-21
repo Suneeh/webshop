@@ -3,3 +3,7 @@
     gap: 2em;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+.app-product-list__image{
+    border-radius: 4px 4px 0 0;
+    aspect-ratio : 1 / 1;
+}

@@ -1,11 +1,18 @@
 <div class="app-product-list__container">
   @for (product of products(); track $index) { @let grossPrice = product.netPrice * (product.taxRate / 100 + 1);
-  <zv-card>
+  <mat-card>
     <a [routerLink]="['/product', product.id]">
-      <p> {{ product.name }} - {{ product.color }} </p>
-      <span>{{ grossPrice | currency : 'EUR' }}</span>
+      <div [style]="'background-color: #' + product.color" class="app-product-list__image"></div>
+      <mat-card-header>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+      </mat-card-header>
     </a>
-    <button mat-flat-button [color]="'accent'">Add to cart</button>
-  </zv-card>
+    <mat-card-content>
+      <a [routerLink]="['/product', product.id]">{{ grossPrice | currency : 'EUR' }}</a>
+    </mat-card-content>
+    <mat-card-actions [align]="'end'">
+      <button mat-flat-button [color]="'accent'">Add to cart</button>
+    </mat-card-actions>
+  </mat-card>
   }
 </div>

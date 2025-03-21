@@ -18,7 +18,7 @@ public static class AnonymousApi
         ) =>
         {
             var res = await ctx.Categories.Include(c => c.Products).SingleOrDefaultAsync(c => c.Id == id);
-            return  res != null
+            return res != null
                 ? Results.Ok(new GetCategoryDetailDto
                 {
                     Id = res.Id,
@@ -31,7 +31,7 @@ public static class AnonymousApi
                         Color = product.ColorCodeHex,
                         NetPrice = product.NetPrice,
                         TaxRate = product.TaxRate,
-                    }).ToArray()
+                    }).OrderByDescending(prod => prod.Color).ToArray()
                 })
                 : Results.NotFound();
         });
@@ -46,15 +46,15 @@ public static class AnonymousApi
                 Name = cat.Name,
             }).ToArrayAsync();
         });
-        
+
         anonymousRouteGroup.MapGet("/products/{id:int}", async (
             [FromRoute] int id,
             [FromServices] ShopDbContext ctx
         ) =>
         {
             var product = await ctx.Products.FindAsync(id);
-            return product == null 
-                ? Results.NotFound() 
+            return product == null
+                ? Results.NotFound()
                 : Results.Ok(TransformProductsToDetailDto(product));
         });
 
@@ -74,7 +74,7 @@ public static class AnonymousApi
             if (string.IsNullOrEmpty(sortOrder))
                 sortOrder = "asc";
             sortBy = char.ToUpper(sortBy[0], CultureInfo.InvariantCulture) + sortBy[1..];
-            query = sortOrder == "asc" 
+            query = sortOrder == "asc"
                 ? query.OrderBy(product => EF.Property<object>(product, sortBy))
                 : query.OrderByDescending(product => EF.Property<object>(product, sortBy));
 
@@ -111,7 +111,7 @@ public static class AnonymousApi
             TaxRate = prod.TaxRate,
         }).ToList();
     }
-    
+
     public record GetCategoryDetailDto
     {
         public required int Id { get; init; }
@@ -119,13 +119,13 @@ public static class AnonymousApi
         public required string? Description { get; init; }
         public required GetProductListDto[] Products { get; init; }
     }
-    
+
     public record GetCategoryListDto
     {
         public required int Id { get; init; }
         public required string Name { get; init; }
     }
-    
+
     public record GetProductListDto
     {
         public required int Id { get; init; }
@@ -134,7 +134,7 @@ public static class AnonymousApi
         public required double NetPrice { get; init; }
         public required double TaxRate { get; init; }
     }
-    
+
     public record GetProductDetailDto
     {
         public required int Id { get; init; }

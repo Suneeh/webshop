@@ -65,9 +65,9 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
   - [ ] Build Pagination ?
 - Product-List Page
   - [x] Build Component with the most important Data available
-  - [ ] Add Db Migration to store color codes
-  - [ ] Fetch color codes from API
-  - [ ] Style Component (Color code should translate into an "image" box of that color)
+  - [x] Style Component (Color code should translate into an "image" box of that color)
+  - [x] Add Db Migration to store color codes
+  - [x] Fetch color codes from API
 - Product-Detail Page
   - [x] Build stub with link and route working
   - [ ] Show all the information on the page
