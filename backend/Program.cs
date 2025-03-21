@@ -24,24 +24,22 @@ builder.Services.AddOpenApiDocument(config =>
 });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(options =>
+    .AddJwtBearer(options =>
+    {
+        options.Authority = "https://suneeh.eu.auth0.com/";
+        options.Audience = "webshop";
+        options.TokenValidationParameters = new TokenValidationParameters
         {
-            options.Authority = "https://suneeh.eu.auth0.com/";
-            options.Audience = "webshop";
-            options.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateAudience = true,
-                ValidateIssuerSigningKey = true
-            };
-        });
+            ValidateAudience = true,
+            ValidateIssuerSigningKey = true
+        };
+    });
 
 
 builder.Services
     .AddAuthorizationBuilder()
-    .AddPolicy("manage", policy => policy.Requirements.Add(
-        new RbacRequirement("manage")
-    )
-);
+    .AddPolicy("user", policy => policy.RequireAuthenticatedUser())
+    .AddPolicy("manage", policy => policy.Requirements.Add(new RbacRequirement("manage")));
 
 builder.Services.AddSingleton<IAuthorizationHandler, RbacHandler>();
 
@@ -57,6 +55,7 @@ if (app.Environment.IsDevelopment())
         config.DocExpansion = "list";
     });
 }
+
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<ShopDbContext>();
@@ -68,6 +67,7 @@ app.UseAuthorization();
 app.UseSecureHeaders();
 app.RegisterAnonymousEndpoints();
 app.RegisterManageEndpoints();
+app.RegisterUserEndpoints();
 app.UseCors("name");
 
 app.Run();

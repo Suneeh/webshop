@@ -12,6 +12,14 @@ public class ShopDbContext(DbContextOptions<ShopDbContext> options) : DbContext(
 		modelBuilder.Entity<Product>()
 			.HasOne(product => product.Category)
 			.WithMany(category => category.Products);
+		
+		modelBuilder.Entity<Rating>()
+			.HasOne(rating => rating.Product)
+			.WithMany(product => product.Ratings);
+
+		modelBuilder.Entity<Rating>()
+			.HasIndex(rating => new { rating.ProductId, rating.Email })
+			.IsUnique();
 	}
 }
 

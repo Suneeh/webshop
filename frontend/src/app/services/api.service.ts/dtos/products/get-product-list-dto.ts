@@ -4,4 +4,5 @@ export interface GetProductListDto {
   color: string;
   netPrice: number;
   taxRate: number;
+  rating: number;
 }

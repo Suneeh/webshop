@@ -26,4 +26,6 @@ public class Product(string name, double netPrice, double taxRate)
 		set => _category = value;
 		get => _category ?? throw new InvalidOperationException("Uninitialized property: " + nameof(Category));
 	}
+	
+	public ICollection<Rating> Ratings { get; set; } = [];
 }

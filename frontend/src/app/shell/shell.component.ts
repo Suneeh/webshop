@@ -29,7 +29,7 @@ export class ShellComponent {
   });
 
   loginWithRedirect() {
-    this.auth.loginWithRedirect({ authorizationParams: { scope: 'manage' } });
+    this.auth.loginWithRedirect({ authorizationParams: { scope: 'manage use' } });
   }
 
   logout() {

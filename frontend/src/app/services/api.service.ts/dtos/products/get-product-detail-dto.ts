@@ -7,4 +7,5 @@ export interface GetProductDetailDto {
   changedDate: Date;
   netPrice: number;
   taxRate: number;
+  rating: number;
 }

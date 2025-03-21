@@ -33,6 +33,10 @@ export class ApiService {
   putCategory(category: PutCategoryDto) {
     return this.http.put(`${apiUri}/categories/`, category);
   }
+
+  getFoo() {
+    return this.http.get<GetCategoryListDto>(`${apiUri}/user/foo`);
+  }
 }
 
 interface GetProductListQueryParams {
