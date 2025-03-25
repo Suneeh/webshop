@@ -1,12 +1,7 @@
-<zv-view [dataSource]="ds"
-  >@let product = ds.result(); @if(product){
-
+<zv-view [dataSource]="ds">
+  @let product = ds.result(); @if(product){
   <h1>{{ product.name }}</h1>
   <pre>{{ product | json }}</pre>
-  <mat-icon (click)="rateItem(1)">star</mat-icon>
-  <mat-icon (click)="rateItem(2)">star</mat-icon>
-  <mat-icon (click)="rateItem(3)">star</mat-icon>
-  <mat-icon (click)="rateItem(4)">star</mat-icon>
-  <mat-icon (click)="rateItem(5)">star</mat-icon>
+  <app-product-rating [rating]="product.rating" [productId]="product.id" />
   }
 </zv-view>

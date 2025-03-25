@@ -6,7 +6,7 @@ public class Rating(string email, int value, int productId)
 {
 	private Product? _product;
 	public int Id { get; init; }
-	public int Value { get; init; } = value;
+	public int Value { get; set; } = value;
 	[StringLength(100)]
 	public string Email { get; set; } = email;
 	public int ProductId { get; set; } = productId;

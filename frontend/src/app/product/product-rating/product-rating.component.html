@@ -1,0 +1,3 @@
+@for (icon of ratingArr(); let idx = $index; track $index) {
+<mat-icon class="app-product-rating__star" (click)="rateItem(idx + 1)">{{ icon }}</mat-icon>
+}

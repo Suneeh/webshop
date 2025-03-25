@@ -6,14 +6,14 @@ namespace backend.Services;
 
 public class ProductService : IProductService
 {
-    public int CalculateRating(Product product)
+    public double CalculateRating(Product product)
     {
         if (product.Ratings.Count == 0)
         {
             return 0;
         }
 
-        return product.Ratings.Sum(rating => rating.Value) / product.Ratings.Count;
+        return product.Ratings.Sum(rating => rating.Value) / (double) product.Ratings.Count;
     }
     
     public GetProduct.GetProductDetailDto TransformProductsToDetailDto(Product product)

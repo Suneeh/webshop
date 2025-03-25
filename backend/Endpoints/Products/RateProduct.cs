@@ -37,11 +37,17 @@ public class RateProduct : IEndpoint
         {
             return Results.BadRequest();
         }
+        var rating = await ctx.Ratings.SingleOrDefaultAsync(rating => rating.ProductId == id && rating.Email == mail);
+        if (rating == null)
+        {
+            rating = new Rating(mail, dto.Rating, id);
+            ctx.Ratings.Add(rating);
+        }
+        else
+        {
+            rating.Value = dto.Rating;
+        }
 
-        var rating = await ctx.Ratings.SingleOrDefaultAsync(rating => rating.ProductId == id && rating.Email == mail) ??
-                     new Rating(mail, dto.Rating, id);
-
-        ctx.Ratings.Add(rating);
         await ctx.SaveChangesAsync();
         return Results.Ok();
     }

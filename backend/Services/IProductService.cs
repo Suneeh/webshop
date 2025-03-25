@@ -6,7 +6,7 @@ namespace backend.Services;
 
 public interface IProductService
 { 
-    int CalculateRating(Product product);
+    double CalculateRating(Product product);
     GetProduct.GetProductDetailDto TransformProductsToDetailDto(Product product);
     IEnumerable<GetCategory.GetProductListDto> TransformProductsToListDto(IEnumerable<Product> products);
 }
