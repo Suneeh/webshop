@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ZvView, ZvViewDataSource } from '@zvoove/components/view';
-import { ApiService } from '../../services/api.service.ts/backend-api.service';
-import { AuthService } from '@auth0/auth0-angular';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatIconModule } from '@angular/material/icon';
-import { of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '@auth0/auth0-angular';
+import { ZvView, ZvViewDataSource } from '@zvoove/components/view';
+import { ApiService } from '../../services/api.service.ts/backend-api.service';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-product-detail',
@@ -25,14 +24,9 @@ export class ProductDetailComponent {
     loadFn: (paramMap) => this.api.getProduct(paramMap.get('id') ?? ''),
   });
 
-  dsfoo = new ZvViewDataSource({
-    loadTrigger$: of({}),
-    loadFn: () => this.api.getFoo(),
-  });
-
   rateItem(rating: number) {
+    // Convert This To ActionDataSource !!
     console.log(rating);
-    console.log(this.dsfoo.result());
     console.log(this.userId()?.email); // if this is null | undefined -> user needs to login first becuse there is no anonymous rating here!
     console.log(this.ds.result()?.id);
   }

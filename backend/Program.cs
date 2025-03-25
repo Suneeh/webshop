@@ -1,11 +1,12 @@
-using backend.Api;
-using Microsoft.EntityFrameworkCore;
-using backend.Database;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using backend.Authorization;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.IdentityModel.Tokens;
+using backend.Database;
+using backend.Extensions;
 using backend.Middlewares;
+using backend.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -39,9 +40,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services
     .AddAuthorizationBuilder()
     .AddPolicy("user", policy => policy.RequireAuthenticatedUser())
-    .AddPolicy("manage", policy => policy.Requirements.Add(new RbacRequirement("manage")));
+    .AddPolicy("admin", policy => policy.Requirements.Add(new RbacRequirement("manage")));
 
 builder.Services.AddSingleton<IAuthorizationHandler, RbacHandler>();
+builder.Services.AddSingleton<IProductService, ProductService>();
+builder.Services.AddMinimalEndpoints();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
@@ -65,9 +68,7 @@ using (var scope = app.Services.CreateScope())
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseSecureHeaders();
-app.RegisterAnonymousEndpoints();
-app.RegisterManageEndpoints();
-app.RegisterUserEndpoints();
+app.RegisterMinimalEndpoints();
 app.UseCors("name");
 
 app.Run();

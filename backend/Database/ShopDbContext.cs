@@ -6,6 +6,7 @@ public class ShopDbContext(DbContextOptions<ShopDbContext> options) : DbContext(
 {
 	public DbSet<Product> Products => Set<Product>();
 	public DbSet<Category> Categories => Set<Category>();
+	public DbSet<Rating> Ratings => Set<Rating>();
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{

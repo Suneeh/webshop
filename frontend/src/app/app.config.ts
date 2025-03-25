@@ -19,7 +19,7 @@ export const appConfig: ApplicationConfig = {
       authorizationParams: {
         redirect_uri: window.location.origin,
         audience: 'webshop',
-        scope: 'openid profile email manage use',
+        scope: 'openid profile email manage',
       },
       httpInterceptor: env.httpInterceptor,
       cacheLocation: 'localstorage',

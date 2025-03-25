@@ -23,7 +23,7 @@ export class ApiService {
   }
 
   getCategories() {
-    return this.http.get<GetCategoryListDto[]>(`${apiUri}/categories/`);
+    return this.http.get<GetCategoryListDto[]>(`${apiUri}/categories`);
   }
 
   getCategory(id: string) {
@@ -31,11 +31,11 @@ export class ApiService {
   }
 
   putCategory(category: PutCategoryDto) {
-    return this.http.put(`${apiUri}/categories/`, category);
+    return this.http.put(`${apiUri}/categories`, category);
   }
 
-  getFoo() {
-    return this.http.get<GetCategoryListDto>(`${apiUri}/user/foo`);
+  getFoo(id: number) {
+    return this.http.get(`${apiUri}/products/${id}/rate`);
   }
 }
 
