@@ -23,6 +23,10 @@ export class ProductRatingComponent {
     const hasHalfStar = this.rating() % 1 !== 0;
     for (let i = 0; i < fullStars; i++) stars.push('star');
     if (hasHalfStar) stars.push('star_half');
+
+    while (stars.length < 5) {
+      stars.push('star_outline');
+    }
     return stars;
   });
 

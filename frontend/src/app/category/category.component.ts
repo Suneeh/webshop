@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ZvView, ZvViewDataSource } from '@zvoove/components/view';
 import { ApiService } from '../services/api.service.ts/backend-api.service';
 import { ProductListComponent } from '../product/product-list/product-list.component';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,6 +19,6 @@ export class CategoryComponent {
 
   ds = new ZvViewDataSource({
     loadTrigger$: this.route.paramMap,
-    loadFn: (paramMap) => this.api.getCategory(paramMap.get('id') ?? ''),
+    loadFn: (paramMap) => this.api.getCategory(coerceNumberProperty(paramMap.get('id'))),
   });
 }

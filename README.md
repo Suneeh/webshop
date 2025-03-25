@@ -56,30 +56,34 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
   - [ ] Create a company logo
     - [ ] Add the company logo to the sidebar
     - [ ] Add FavIcon
+    - [ ] Add Logo to the login mask of auth0
+- Product Rating
+  - [x] Build Component that shows stars instead of numbers
+  - [ ] Call Action Data Source to actually rate an item
 - Category Page
   - [ ] Build Sorting & Filtering (once there is metrics to sort/filter by)
   - [ ] Build Pagination (will this ever be needed ?)
 - Product-List Component
-  - [ ] Show Rating
+  - [x] Show Rating
   - [ ] Show Discount
 - Product-Detail Page
   - [x] Build stub with link and route working
-  - [ ] Show all the information on the page
+  - [x] Show all the information on the page
+  - [x] Rating(s) of users
   - [ ] Style the page
   - [ ] Think about ideas of how to fill the page afterwards
     - Related Products
     - Discount ?
     - Items in Stock ?
     - Tags ?
-    - Rating(s) of users
 - Dashboard
   - [x] Newest products
-  - [ ] Build Landing Page
   - [ ] Top Rated Products
+  - [ ] Build Landing Page
   - [ ] Top selling products (super late - when orders are a thing)
   - [ ] Special offer products
 - Misc
   - [x] Refactor API to Seperate APIs / Files with 1 file for Endpoint + Method + DTOs
+  - [ ] Write Test(s) for the endpoints
   - [ ] Check why intellisense is not suggesting imports correctly?
   - [ ] Brand categories?
-  - [ ] Write Test(s) for the endpoints then.

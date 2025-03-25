@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ZvView, ZvViewDataSource } from '@zvoove/components/view';
 import { ApiService } from '../../services/api.service.ts/backend-api.service';
 import { ProductRatingComponent } from '../product-rating/product-rating.component';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-product-detail',
@@ -17,6 +18,6 @@ export class ProductDetailComponent {
   private api = inject(ApiService);
   ds = new ZvViewDataSource({
     loadTrigger$: this.route.paramMap,
-    loadFn: (paramMap) => this.api.getProduct(paramMap.get('id') ?? ''),
+    loadFn: (paramMap) => this.api.getProduct(coerceNumberProperty(paramMap.get('id'))),
   });
 }

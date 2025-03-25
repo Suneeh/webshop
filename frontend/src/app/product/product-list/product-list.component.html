@@ -8,6 +8,7 @@
       </mat-card-header>
     </a>
     <mat-card-content>
+      <app-product-rating [rating]="product.rating" [productId]="product.id" />
       <a [routerLink]="['/product', product.id]">{{ grossPrice | currency : 'EUR' }}</a>
     </mat-card-content>
     <mat-card-actions [align]="'end'">

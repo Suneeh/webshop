@@ -18,7 +18,7 @@ export class ApiService {
     return this.http.get<GetProductListDto[]>(`${apiUri}/products?${toQueryString(data)}`);
   }
 
-  getProduct(id: string): Observable<GetProductDetailDto> {
+  getProduct(id: number): Observable<GetProductDetailDto> {
     return this.http.get<GetProductDetailDto>(`${apiUri}/products/${id}`);
   }
 
@@ -26,7 +26,7 @@ export class ApiService {
     return this.http.get<GetCategoryListDto[]>(`${apiUri}/categories`);
   }
 
-  getCategory(id: string) {
+  getCategory(id: number) {
     return this.http.get<GetCategoryDetailDto>(`${apiUri}/categories/${id}`);
   }
 
