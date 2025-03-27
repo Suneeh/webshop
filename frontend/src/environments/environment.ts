@@ -31,6 +31,13 @@ export const environment = {
     allowedList: [
       {
         uri: `${apiUri}/*`,
+        allowAnonymous: true,
+        tokenOptions: {
+          authorizationParams: {
+            audience: 'webshop',
+            scope: 'manage',
+          },
+        },
       },
     ],
   },

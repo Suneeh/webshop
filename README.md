@@ -84,6 +84,7 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
   - [ ] Special offer products
 - Misc
   - [x] Refactor API to Seperate APIs / Files with 1 file for Endpoint + Method + DTOs
+  - [ ] Build Css with Media Queries for Mobile, FullHD and QHD screens
   - [ ] Write Test(s) for the endpoints
   - [ ] Check why intellisense is not suggesting imports correctly?
   - [ ] Brand categories?
