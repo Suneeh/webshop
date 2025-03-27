@@ -25,18 +25,18 @@ public class RateProduct : IEndpoint
         HttpContext context
     )
     {
-        var product = await ctx.Products.FindAsync(id);
-        if (product == null)
-        {
-            return Results.BadRequest();
-        }
-
         const string emailClaimKey = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress";
         var mail = context.User.Claims.FirstOrDefault(c => c.Type == emailClaimKey)?.Value;
         if (mail == null)
         {
             return Results.BadRequest();
         }
+        var product = await ctx.Products.FirstOrDefaultAsync(product => product.Id == id);
+        if (product == null)
+        {
+            return Results.BadRequest();
+        }
+        
         var rating = await ctx.Ratings.SingleOrDefaultAsync(rating => rating.ProductId == id && rating.Email == mail);
         if (rating == null)
         {

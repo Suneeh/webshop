@@ -7,6 +7,7 @@ import { PutCategoryDto } from './dtos/categories/put-category-dto';
 import { GetProductDetailDto } from './dtos/products/get-product-detail-dto';
 import { GetCategoryListDto } from './dtos/categories/get-category-list-dto';
 import { GetProductListDto } from './dtos/products/get-product-list-dto';
+import { PostProductRatingDto } from './dtos/products/post-product-rating-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -34,8 +35,8 @@ export class ApiService {
     return this.http.put(`${apiUri}/categories`, category);
   }
 
-  getFoo(id: number) {
-    return this.http.get(`${apiUri}/products/${id}/rate`);
+  postProductRating(productId: number, dto: PostProductRatingDto) {
+    return this.http.post(`${apiUri}/products/${productId}/rate`, dto);
   }
 }
 

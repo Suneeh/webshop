@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, input } from '@an
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '@auth0/auth0-angular';
+import { ApiService } from '../../services/api.service.ts/backend-api.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -13,6 +14,8 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class ProductRatingComponent {
   private auth = inject(AuthService);
+  private api = inject(ApiService);
+
   private user = toSignal(this.auth.user$);
 
   rating = input.required<number>();
@@ -32,8 +35,6 @@ export class ProductRatingComponent {
 
   rateItem(rating: number) {
     if (!this.user()?.email) return;
-    // Convert This To ActionDataSource !!
-    console.log(rating);
-    console.log(this.productId());
+    this.api.postProductRating(this.productId(), { rating: rating }).subscribe();
   }
 }
