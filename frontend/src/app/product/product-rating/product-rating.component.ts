@@ -4,7 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '@auth0/auth0-angular';
 import { ApiService } from '../../services/api.service.ts/backend-api.service';
-
+import { ZvActionButtonDataSource } from '@zvoove/components/action-button';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-product-rating',
@@ -33,8 +33,15 @@ export class ProductRatingComponent {
     return stars;
   });
 
+  private newRating: number = 0;
+
+  ads = new ZvActionButtonDataSource({
+    actionFn: () => this.api.postProductRating(this.productId(), { rating: this.newRating }),
+  });
+
   rateItem(rating: number) {
     if (!this.user()?.email) return;
-    this.api.postProductRating(this.productId(), { rating: rating }).subscribe();
+    this.newRating = rating;
+    this.ads.execute();
   }
 }

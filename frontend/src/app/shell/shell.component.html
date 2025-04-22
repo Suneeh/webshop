@@ -2,8 +2,8 @@
   <mat-sidenav #sidenav mode="side" opened class="sidenav">
     <mat-nav-list class="nav-list" dense>
       <a [routerLink]="['/']" class="nav-link-item" mat-list-item>
-        <mat-icon matListItemIcon>home</mat-icon>
-        <span matListItemTitle>Home</span>
+        <img matListItemIcon class="logo" src="/assets/logo.png" alt="Sunshine Webshop Logo" />
+        <span matListItemTitle>Sunshine</span>
       </a>
       <zv-view [dataSource]="ds">
         @for(category of ds.result(); track category.id){
@@ -20,7 +20,7 @@
         <span>
           Follow this project on <a href="https://dev.to/suneeh" rel="noopener noreferrer" target="_blank">dev.to</a>
           and on
-          <a href="https://github.com/Suneeh/webshop" rel="noopener noreferrer" target="_blank">github</a>.
+          <a href="https://github.com/Suneeh/webshop" rel="noopener noreferrer" target="_blank">GitHub</a>.
         </span>
       </mat-toolbar>
       <mat-toolbar class="head-bar">

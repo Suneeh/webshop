@@ -4,8 +4,6 @@ This repository is my take on a webshop. I have built and modified many webshops
 
 Follow my journey on [dev.to](https://dev.to/suneeh).
 
-Check it out! It is deployed [here](https://shop.suneeh.de/).
-
 # Contributing
 
 ## Clone the repo
@@ -20,21 +18,7 @@ Use `npm install` to install all packages and dependancies.
 
 ## Development server
 
-### Local
-
 Copy the `./auth_config.example.json` [file](https://github.com/Suneeh/webshop/blob/main/frontend/auth_config.example.json) and remove the `example` fill it with your own values. After that run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-### Docker
-
-#### Frontend Docker Start Up
-
-`docker build -t frontend . && docker run -d -p 80:80 --name frontend frontend`
-
-#### Backend Docker Start Up
-
-`docker build -t backend . && docker run -d -p 5292:8080 --name backend backend`
-
-#### Database Docker Start Up
 
 `docker run --name webshopDb -e POSTGRES_PASSWORD=MYPASSWORD -p 5432:5432 -d postgres`
 
@@ -53,13 +37,13 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
   - [ ] (Future) Add guards for user specifics or management pages
 - Shell
   - [ ] Build Footer with hotlinks and more information
-  - [ ] Create a company logo
-    - [ ] Add the company logo to the sidebar
-    - [ ] Add FavIcon
-    - [ ] Add Logo to the login mask of auth0
-- Product Rating
-  - [x] Build Component that shows stars instead of numbers
-  - [ ] Call Action Data Source to actually rate an item
+  - [x] ~~Create a company logo~~
+    - [x] ~~Add the company logo to the sidebar~~
+    - [x] ~~Add FavIcon~~
+    - [x] ~~Add Logo to the login mask of auth0~~
+- ~~Product Rating~~
+  - [x] ~~Build Component that shows stars instead of numbers~~
+  - [x] ~~Call Action Data Source to actually rate an item~~
 - Category Page
   - [ ] Build Sorting & Filtering (once there is metrics to sort/filter by)
   - [ ] Build Pagination (will this ever be needed ?)

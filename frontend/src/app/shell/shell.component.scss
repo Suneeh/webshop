@@ -1,3 +1,7 @@
+.logo {
+  height: 70px;
+  width: auto;
+}
 .sidenavcontainer {
   height: 100%;
 }
@@ -11,9 +15,6 @@
 }
 .nav-link-item {
   margin: 0.5em 0;
-  mat-icon {
-    margin-right: 16px;
-  }
 }
 .head-bar {
   display: flex;
@@ -22,6 +23,9 @@
 .head-bar-action {
   margin: 0 0 0 auto;
   display: flex;
+}
+#header a {
+  text-decoration: underline;
 }
 #main {
   padding: 0 2em 3em;
