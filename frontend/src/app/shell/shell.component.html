@@ -1,9 +1,9 @@
-<mat-sidenav-container autosize class="sidenavcontainer">
-  <mat-sidenav #sidenav mode="side" opened class="sidenav">
-    <mat-nav-list class="nav-list" dense>
-      <a [routerLink]="['/']" class="nav-link-item" mat-list-item>
-        <img matListItemIcon class="logo" src="/assets/logo.png" alt="Sunshine Webshop Logo" />
-        <span matListItemTitle>Sunshine</span>
+<mat-sidenav-container autosize class="h-full">
+  <mat-sidenav #sidenav mode="side" opened class="min-w-55">
+    <mat-nav-list dense>
+      <a [routerLink]="['/']" class="my-2 flex items-center">
+        <img class="size-20" src="/assets/logo.png" alt="Sunshine Webshop Logo" />
+        <span>Sunshine</span>
       </a>
       <zv-view [dataSource]="ds">
         @for(category of ds.result(); track category.id){
@@ -15,17 +15,15 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div id="header">
+    <div>
       <mat-toolbar color="accent">
         <span>
-          Follow this project on <a href="https://dev.to/suneeh" rel="noopener noreferrer" target="_blank">dev.to</a>
-          and on
-          <a href="https://github.com/Suneeh/webshop" rel="noopener noreferrer" target="_blank">GitHub</a>.
+          Follow this project on
+          <a href="https://dev.to/suneeh" rel="noopener noreferrer" target="_blank" class="underline">dev.to</a> and on
+          <a href="https://github.com/Suneeh/webshop" rel="noopener noreferrer" target="_blank" class="underline">GitHub</a>.
         </span>
-      </mat-toolbar>
-      <mat-toolbar class="head-bar">
         @if((auth.isAuthenticated$ | async) === false){
-        <button mat-stroked-button (click)="loginWithRedirect()">Log in</button>
+        <button mat-flat-button class="ml-auto" color="secondary" (click)="loginWithRedirect()">Log in</button>
         }@else {
         <button mat-stroked-button (click)="logout()"> Log out </button>
         @if(auth.user$ | async; as user){
@@ -34,12 +32,12 @@
         } }
       </mat-toolbar>
     </div>
-    <div id="main">
+    <div class="px-8 py-12">
       <router-outlet></router-outlet>
     </div>
-    <div id="footer">
+    <div class="py-12 px-8 flex gap-4">
       <span>© {{ year }} - Suneeh</span>
-      <span><a href="https://github.com/Suneeh/webshop" rel="noopener noreferrer" target="_blank">github</a></span>
+      <span><a class="underline" href="https://github.com/Suneeh/webshop" rel="noopener noreferrer" target="_blank">GitHub</a></span>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

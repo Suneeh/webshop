@@ -15,7 +15,7 @@ public class Product(string name, double netPrice, double taxRate)
 
 	[StringLength(6)] 
 	public string ColorCodeHex { get; set; } = string.Empty;
-	public DateTimeOffset CreationDate { get; set; } = DateTimeOffset.UtcNow;
+	public DateTimeOffset CreationDate { get; init; } = DateTimeOffset.UtcNow;
 	public DateTimeOffset ChangedDate { get; set; }
 	public double NetPrice { get; set; } = netPrice;
 	public double TaxRate { get; set; } = taxRate;
@@ -23,7 +23,7 @@ public class Product(string name, double netPrice, double taxRate)
 
 	public Category Category
 	{
-		set => _category = value;
+		init => _category = value;
 		get => _category ?? throw new InvalidOperationException("Uninitialized property: " + nameof(Category));
 	}
 	

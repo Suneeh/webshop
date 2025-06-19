@@ -12,5 +12,5 @@ public class Category(string name)
 	[StringLength(1000)]
 	public string? Description { get; set; }
 
-	public ICollection<Product> Products { get; set; } = [];
+	public ICollection<Product> Products { get; init; } = [];
 }

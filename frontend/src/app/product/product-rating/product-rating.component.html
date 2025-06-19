@@ -1,5 +1,5 @@
 <div>
   @for (icon of ratingArr(); let idx = $index; track $index) {
-  <mat-icon class="app-product-rating__star" (click)="rateItem(idx + 1)">{{ icon }}</mat-icon>
+  <mat-icon style="color: GoldenRod" class="cursor-pointer" (click)="rateItem(idx + 1)">{{ icon }}</mat-icon>
   }
 </div>

@@ -1,8 +1,8 @@
-<div class="app-product-list__container">
+<div class="grid grid-cols-4 gap-8">
   @for (product of products(); track $index) { @let grossPrice = product.netPrice * (product.taxRate / 100 + 1);
   <mat-card>
     <a [routerLink]="['/product', product.id]">
-      <div [style]="'background-color: #' + product.color" class="app-product-list__image"></div>
+      <div [style]="'background-color: #' + product.color" class="aspect-square"></div>
       <mat-card-header>
         <mat-card-title>{{ product.name }}</mat-card-title>
       </mat-card-header>

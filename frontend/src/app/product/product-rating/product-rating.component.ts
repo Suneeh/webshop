@@ -10,7 +10,6 @@ import { ZvActionButtonDataSource } from '@zvoove/components/action-button';
   selector: 'app-product-rating',
   imports: [CommonModule, MatIconModule],
   templateUrl: './product-rating.component.html',
-  styleUrl: './product-rating.component.scss',
 })
 export class ProductRatingComponent {
   private auth = inject(AuthService);

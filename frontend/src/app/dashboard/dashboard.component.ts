@@ -10,7 +10,6 @@ import { ProductListComponent } from '../product/product-list/product-list.compo
   selector: 'app-dashboard',
   imports: [CommonModule, ZvView, ProductListComponent],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
   api = inject(ApiService);

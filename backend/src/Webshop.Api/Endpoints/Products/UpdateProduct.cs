@@ -34,6 +34,8 @@ public class UpdateProduct : IEndpoint
             product.NetPrice = dto.NetPrice.NewValue;
         if (dto.CategoryId != null)
             product.CategoryId = dto.CategoryId.NewValue;
+        if(dto.Color != null)
+            product.ColorCodeHex = dto.Color.NewValue;
         product.ChangedDate = time.GetUtcNow();
         await ctx.SaveChangesAsync();
         return Results.Ok();
@@ -46,5 +48,6 @@ public class UpdateProduct : IEndpoint
         public required RequiredValue<double>? NetPrice { get; init; }
         public required RequiredValue<double>? TaxRate { get; init; }
         public required RequiredValue<int>? CategoryId { get; init; }
+        public required RequiredValue<string>? Color { get; init; }
     }
 }

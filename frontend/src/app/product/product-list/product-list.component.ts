@@ -11,7 +11,6 @@ import { ProductRatingComponent } from '../product-rating/product-rating.compone
   selector: 'app-product-list',
   imports: [CommonModule, MatCardModule, MatButton, RouterLink, ProductRatingComponent],
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.scss',
 })
 export class ProductListComponent {
   products = input.required<GetProductListDto[]>();

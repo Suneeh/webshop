@@ -23,8 +23,11 @@
     "@angular/platform-browser-dynamic": "^19.2.7",
     "@angular/router": "^19.2.7",
     "@auth0/auth0-angular": "^2.2.3",
+    "@tailwindcss/postcss": "^4.1.10",
     "@zvoove/components": "^19.3.0",
+    "postcss": "^8.5.6",
     "rxjs": "~7.8.1",
+    "tailwindcss": "^4.1.10",
     "tslib": "^2.6.2",
     "zone.js": "~0.15.0"
   },

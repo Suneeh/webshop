@@ -1,6 +1,6 @@
 <zv-view [dataSource]="ds">
   @let product = ds.result(); @if(product){
-  <h1>{{ product.name }}</h1>
+  <h1 class="text-3xl">{{ product.name }}</h1>
   <pre>{{ product | json }}</pre>
   <app-product-rating [rating]="product.rating" [productId]="product.id" />
   }

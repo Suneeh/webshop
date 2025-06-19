@@ -11,7 +11,6 @@ import { coerceNumberProperty } from '@angular/cdk/coercion';
   selector: 'app-category',
   imports: [CommonModule, ZvView, ProductListComponent],
   templateUrl: './category.component.html',
-  styleUrl: './category.component.scss',
 })
 export class CategoryComponent {
   private route = inject(ActivatedRoute);

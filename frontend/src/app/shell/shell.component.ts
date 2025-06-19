@@ -16,7 +16,6 @@ import { ApiService } from '../services/api.service.ts/backend-api.service';
   selector: 'app-shell',
   imports: [MatSidenavModule, RouterModule, MatListModule, MatButtonModule, MatIconModule, MatToolbarModule, CommonModule, ZvView],
   templateUrl: './shell.component.html',
-  styleUrl: './shell.component.scss',
 })
 export class ShellComponent {
   public auth = inject(AuthService);
