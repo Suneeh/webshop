@@ -22,6 +22,8 @@ public class GetCategory : IEndpoint
         var res = await ctx.Categories
             .Include(c => c.Products)
             .ThenInclude(prod => prod.Ratings)
+            .Include(c => c.Products)
+            .ThenInclude(prod => prod.Discounts)
             .SingleOrDefaultAsync(c => c.Id == id);
         return res != null
             ? Results.Ok(new GetCategoryDetailDto
@@ -36,7 +38,8 @@ public class GetCategory : IEndpoint
                     Color = product.ColorCodeHex,
                     NetPrice = product.NetPrice,
                     TaxRate = product.TaxRate,
-                    Rating = product.GetRating()
+                    Rating = product.GetRating(),
+                    Discount = product.GetBiggestDiscount()
                 }).ToArray()
             })
             : Results.NotFound();
@@ -59,5 +62,6 @@ public class GetCategory : IEndpoint
         public required double NetPrice { get; init; }
         public required double TaxRate { get; init; }
         public required double Rating { get; init; }
+        public required double Discount { get; init; }
     }
 }

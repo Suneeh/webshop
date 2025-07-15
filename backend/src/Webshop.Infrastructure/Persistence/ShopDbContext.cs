@@ -8,6 +8,7 @@ public class ShopDbContext(DbContextOptions<ShopDbContext> options) : DbContext(
 	public DbSet<Product> Products => Set<Product>();
 	public DbSet<Category> Categories => Set<Category>();
 	public DbSet<Rating> Ratings => Set<Rating>();
+	public DbSet<Discount> Discounts => Set<Discount>();
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
@@ -22,6 +23,10 @@ public class ShopDbContext(DbContextOptions<ShopDbContext> options) : DbContext(
 		modelBuilder.Entity<Rating>()
 			.HasIndex(rating => new { rating.ProductId, rating.Email })
 			.IsUnique();
+		
+		modelBuilder.Entity<Product>()
+			.HasMany(e => e.Discounts)
+			.WithMany(e => e.Products);
 	}
 }
 

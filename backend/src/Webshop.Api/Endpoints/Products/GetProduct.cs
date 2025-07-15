@@ -22,6 +22,7 @@ public class GetProduct : IEndpoint
     {
         var product = await ctx.Products
             .Include(prod => prod.Ratings)
+            .Include(prod => prod.Discounts)
             .Select(product => new GetProductDetailDto
             {
                 Id = product.Id,
@@ -33,7 +34,8 @@ public class GetProduct : IEndpoint
                 CreationDate = product.CreationDate,
                 ChangedDate = product.ChangedDate,
                 CategoryId = product.CategoryId,
-                Rating = product.GetRating()
+                Rating = product.GetRating(),
+                Discount = product.GetBiggestDiscount()
             })
             .SingleOrDefaultAsync(prod => prod.Id == id);
         return product == null
@@ -53,5 +55,6 @@ public class GetProduct : IEndpoint
         public required DateTimeOffset CreationDate { get; init; }
         public required DateTimeOffset ChangedDate { get; init; }
         public required int? CategoryId { get; init; }
+        public required double? Discount { get; init; }
     }
 }

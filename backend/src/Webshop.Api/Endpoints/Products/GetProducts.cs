@@ -47,7 +47,8 @@ public class GetProducts : IEndpoint
             Color = product.ColorCodeHex,
             NetPrice = product.NetPrice,
             TaxRate = product.TaxRate,
-            Rating = product.GetRating()
+            Rating = product.GetRating(),
+            Discount = product.GetBiggestDiscount()
         }).ToArray());
     }
 
@@ -59,5 +60,6 @@ public class GetProducts : IEndpoint
         public required double NetPrice { get; init; }
         public required double TaxRate { get; init; }
         public required double Rating { get; init; }
+        public required double Discount { get; init; }
     }
 }

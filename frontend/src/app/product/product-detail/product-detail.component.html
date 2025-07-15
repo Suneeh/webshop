@@ -1,7 +1,19 @@
 <zv-view [dataSource]="ds">
   @let product = ds.result(); @if(product){
-  <h1 class="text-3xl">{{ product.name }}</h1>
-  <pre>{{ product | json }}</pre>
-  <app-product-rating [rating]="product.rating" [productId]="product.id" />
+  <div class="grid grid-cols-12 gap-3">
+    <div [style]="'background-color: #' + product.color" class="col-span-12 md:col-span-6 aspect-square"></div>
+    <div class="col-span-12 md:col-span-6">
+      <div class="text-3xl">{{ product.name }}</div>
+      <app-product-price [grossPrice]="product.netPrice * (product.taxRate / 100 + 1)" [discount]="product.discount"></app-product-price>
+      <app-product-rating [rating]="product.rating" [productId]="product.id" />
+      <pre>{{ product | json }}</pre>
+      <div>placeholder: Product Variations</div>
+      <div>placeholder: Quantity, Add to Card</div>
+      <div>placeholder: Add to Card</div>
+      <div>placeholder: Shipping info</div>
+    </div>
+  </div>
+
+  <div>{{ product.description }}</div>
   }
 </zv-view>

@@ -8,4 +8,5 @@ export interface GetProductDetailDto {
   netPrice: number;
   taxRate: number;
   rating: number;
+  discount: number;
 }

@@ -28,7 +28,6 @@ public class Product(string name, double netPrice, double taxRate)
 	}
 	
 	public ICollection<Rating> Ratings { get; init; } = [];
-	
 	public double GetRating()
 	{
 		if (Ratings.Count == 0)
@@ -37,5 +36,17 @@ public class Product(string name, double netPrice, double taxRate)
 		}
 
 		return Ratings.Sum(rating => rating.Value) / (double) Ratings.Count;
+	}
+	
+	public List<Discount> Discounts { get; } = [];
+	public double GetBiggestDiscount()
+	{
+		if(Discounts.Count == 0)
+		{
+			return 0;
+		}
+		return Discounts
+				.Where(discount => discount.ValidUntil == null || discount.ValidUntil > DateTimeOffset.UtcNow)
+				.Max(discount => discount.Value);
 	}
 }

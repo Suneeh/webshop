@@ -49,15 +49,15 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
   - [ ] Build Pagination (will this ever be needed ?)
 - Product-List Component
   - [x] Show Rating
-  - [ ] Show Discount
+  - [x] Show Discount
 - Product-Detail Page
   - [x] Build stub with link and route working
   - [x] Show all the information on the page
   - [x] Rating(s) of users
+  - [x] Discount
   - [ ] Style the page
   - [ ] Think about ideas of how to fill the page afterwards
     - Related Products
-    - Discount ?
     - Items in Stock ?
     - Tags ?
 - Dashboard
@@ -68,7 +68,7 @@ Run `npm run deploy` after you renamed the `deployment.exmaple.sh` to `deploymen
   - [ ] Special offer products
 - Misc
   - [x] Refactor API to Seperate APIs / Files with 1 file for Endpoint + Method + DTOs
-  - [ ] Build Css with Media Queries for Mobile, FullHD and QHD screens
+  - [x] Build Css with Media Queries for Mobile, FullHD and QHD screens
   - [ ] Write Test(s) for the endpoints
   - [ ] Check why intellisense is not suggesting imports correctly?
   - [ ] Brand categories?

@@ -9,7 +9,9 @@
     </a>
     <mat-card-content>
       <app-product-rating [rating]="product.rating" [productId]="product.id" />
-      <a [routerLink]="['/product', product.id]">{{ grossPrice | currency : 'EUR' }}</a>
+      <a [routerLink]="['/product', product.id]">
+        <app-product-price [grossPrice]="grossPrice" [discount]="product.discount"></app-product-price>
+      </a>
     </mat-card-content>
     <mat-card-actions [align]="'end'">
       <button mat-flat-button [color]="'accent'">Add to cart</button>

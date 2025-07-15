@@ -6,10 +6,11 @@ import { ZvView, ZvViewDataSource } from '@zvoove/components/view';
 import { ApiService } from '../../services/api.service.ts/backend-api.service';
 import { ProductRatingComponent } from '../product-rating/product-rating.component';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { ProductPriceComponent } from '../product-price/product-price.component';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-product-detail',
-  imports: [CommonModule, ZvView, MatIconModule, ProductRatingComponent],
+  imports: [CommonModule, ZvView, MatIconModule, ProductRatingComponent, ProductPriceComponent],
   templateUrl: './product-detail.component.html',
 })
 export class ProductDetailComponent {

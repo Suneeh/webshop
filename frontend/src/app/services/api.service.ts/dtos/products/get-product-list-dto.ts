@@ -5,4 +5,5 @@ export interface GetProductListDto {
   netPrice: number;
   taxRate: number;
   rating: number;
+  discount: number;
 }
