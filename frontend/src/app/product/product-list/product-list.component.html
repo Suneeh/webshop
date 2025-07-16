@@ -1,4 +1,4 @@
-<div class="grid grid-cols-4 gap-8">
+<div class="grid grid-cols-4 gap-8" [@animation]="products()">
   @for (product of products(); track $index) { @let grossPrice = product.netPrice * (product.taxRate / 100 + 1);
   <mat-card>
     <a [routerLink]="['/product', product.id]">
@@ -13,7 +13,7 @@
         <app-product-price [grossPrice]="grossPrice" [discount]="product.discount"></app-product-price>
       </a>
     </mat-card-content>
-    <mat-card-actions [align]="'end'">
+    <mat-card-actions [align]="'end'" class="mt-auto">
       <button mat-flat-button [color]="'accent'">Add to cart</button>
     </mat-card-actions>
   </mat-card>
